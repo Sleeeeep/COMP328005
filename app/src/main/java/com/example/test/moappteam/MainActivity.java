@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mMainNav = (BottomNavigationView)findViewById(R.id.main_nav);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mainFragment = new MainFragment();
         mypageFragment = new MypageFragment();
