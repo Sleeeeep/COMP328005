@@ -6,26 +6,31 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mMainNav;
-    private FrameLayout mMainFrame;
+    private LinearLayout mMainFrame;
 
     private MainFragment mainFragment;
     private MypageFragment mypageFragment;
     private SpeakFragment speakFragment;
     private RankFragment rankFragment;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMainFrame = (FrameLayout)findViewById(R.id.main_frame);
+        mMainFrame = (LinearLayout)findViewById(R.id.main_frame);
         mMainNav = (BottomNavigationView)findViewById(R.id.main_nav);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mainFragment = new MainFragment();
         mypageFragment = new MypageFragment();
