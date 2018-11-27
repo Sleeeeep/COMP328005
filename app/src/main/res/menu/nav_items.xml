@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_main"
+        android:icon="@drawable/home_24dp"
+        android:title="@string/nav_main" />
+    <item
+        android:id="@+id/nav_mypage"
+        android:icon="@drawable/person_24dp"
+        android:title="@string/nav_mypage" />
+    <item
+        android:id="@+id/nav_speak"
+        android:icon="@drawable/speaker_24dp"
+        android:title="@string/nav_pane" />
+    <item
+        android:id="@+id/nav_rank"
+        android:icon="@drawable/swap_24dp"
+        android:title="@string/nav_rank" />
+</menu>
