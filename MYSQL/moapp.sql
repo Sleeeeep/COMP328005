@@ -1,0 +1,168 @@
+DROP DATABASE IF EXISTS MOAPP;
+CREATE DATABASE MOAPP DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE MOAPP;
+
+DROP TABLE IF EXISTS mUSER;
+CREATE TABLE mUSER(
+	Id VARCHAR(20),
+	Pw VARCHAR(15) NOT NULL,
+	Sid CHAR(10) NOT NULL,
+	Name VARCHAR(5) NOT NULL,
+	Nick VARCHAR(8) NOT NULL,
+	PRIMARY KEY(ID),
+    UNIQUE(Sid), UNIQUE(Nick)
+);
+
+DROP TABLE IF EXISTS mFIELD;
+CREATE TABLE mFIELD(
+    Fnumber INT auto_increment,
+    Fname VARCHAR(10) NOT NULL,
+    PRIMARY KEY(Fnumber),
+    UNIQUE(Fname)
+);
+
+DROP TABLE IF EXISTS mQUESTION;
+CREATE TABLE mQUESTION(
+    Qnumber INT auto_increment,
+    Title VARCHAR(30) NOT NULL,
+    Content VARCHAR(2000) NOT NULL,
+    Qtime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Rating DECIMAL(2,1) DEFAULT 0,
+    Good INT DEFAULT 0,
+    PRIMARY KEY(Qnumber)
+);
+
+DROP TABLE IF EXISTS mCOMMENT;
+CREATE TABLE mCOMMENT(
+    Cnumber INT auto_increment,
+    Content VARCHAR(500) NOT NULL,
+    Ctime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Rating DECIMAL(2,1) DEFAULT 0,
+    Good INT DEFAULT 0,
+    PRIMARY KEY(Cnumber)
+);
+
+DROP TABLE IF EXISTS mFAVOR;
+CREATE TABLE mFAVOR(
+	Uid VARCHAR(20),
+	Fno INT,
+    PRIMARY KEY(Uid, Fno),
+    FOREIGN KEY(Uid) REFERENCES mUSER(Id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(Fno) REFERENCES mFIELD(Fnumber) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS mASK;
+CREATE TABLE mASK(
+	Uid VARCHAR(20),
+	Qno INT,
+    PRIMARY KEY(Uid, Qno),
+    FOREIGN KEY(Uid) REFERENCES mUSER(Id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(Qno) REFERENCES mQUESTION(Qnumber) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS mANSWER;
+CREATE TABLE mANSWER(
+	Uid VARCHAR(20),
+	Cno INT,
+    PRIMARY KEY(Uid, Cno),
+    FOREIGN KEY(Uid) REFERENCES mUSER(Id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(Cno) REFERENCES mCOMMENT(Cnumber) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS mREPLY;
+CREATE TABLE mFAVOR(
+	Qno INT,
+	Fno INT,
+    PRIMARY KEY(Qno, Fno),
+    FOREIGN KEY(Qno) REFERENCES mQUESTION(Qnumber) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(Cno) REFERENCES mCOMMENT(Cnumber) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DELIMITER //
+DROP TRIGGER IF EXISTS ins_users//
+CREATE TRIGGER ins_users BEFORE INSERT ON mUSER FOR EACH ROW
+BEGIN
+	SET NEW.Id = IF(length(NEW.Id)>=4, NEW.Id, null);
+	SET NEW.Pw = IF(length(NEW.Pw)>=4, NEW.Pw, null);
+    SET NEW.Sid = IF(length(NEW.Sid)=10, NEW.Sid, null);
+    SET NEW.Name = IF(length(NEW.Name)>=2, NEW.Name, null);
+    SET NEW.Nick = IF(length(NEW.Nick)>=2, NEW.Nick, null);
+END//
+DROP TRIGGER IF EXISTS upd_users//
+CREATE TRIGGER upd_users BEFORE UPDATE ON mUSER FOR EACH ROW
+BEGIN
+	SET NEW.Id = IF(length(NEW.Id)>=4, NEW.Id, OLD.Id);
+	SET NEW.Pw = IF(length(NEW.Pw)>=4, NEW.Pw, OLD.Pw);
+    SET NEW.Sid = IF(length(NEW.Sid)=10, OLD.Sid, OLD.Sid);
+    SET NEW.Name = IF(length(NEW.Name)>=2, NEW.Name, OLD.Name);
+    SET NEW.Nick = IF(length(NEW.Nick)>=2, NEW.Nick, OLD.Nick);
+END//
+
+DROP TRIGGER IF EXISTS ins_field//
+CREATE TRIGGER ins_field BEFORE INSERT ON mFIELD FOR EACH ROW
+BEGIN
+	SET NEW.Fname = IF(length(NEW.Fname)>=1, NEW.Fname, null);
+END//
+DROP TRIGGER IF EXISTS upd_field//
+CREATE TRIGGER upd_field BEFORE UPDATE ON mFIELD FOR EACH ROW
+BEGIN
+	SET NEW.Fname = IF(length(NEW.Fname)>=1, NEW.Fname, null);
+END//
+
+DROP TRIGGER IF EXISTS ins_question//
+CREATE TRIGGER ins_question BEFORE INSERT ON mQUESTION FOR EACH ROW
+BEGIN
+	SET NEW.Title = IF(length(NEW.Title)>=5, NEW.Title, null);
+    SET NEW.Content = IF(length(NEW.Content)>=1, NEW.Content, null);
+    SET NEW.Rating = IF(NEW.Rating>10, 10, NEW.Rating);
+    SET NEW.Rating = IF(NEW.Rating<0, 0, NEW.Rating);
+    SET NEW.Good = IF(NEW.Good<0, 0, NEW.Good);
+END//
+DROP TRIGGER IF EXISTS upd_question//
+CREATE TRIGGER upd_question BEFORE UPDATE ON mQUESTION FOR EACH ROW
+BEGIN
+	SET NEW.Title = IF(length(NEW.Title)>=5, NEW.Title, OLD.Title);
+    SET NEW.Content = IF(length(NEW.Content)>=1, NEW.Content, OLD.Content);
+    SET NEW.Qtime = IF(NEW.Qtime = OLD.Qtime, NEW.Qtime, OLD.Qtime);
+    SET NEW.Rating = IF(NEW.Rating>10, 10, NEW.Rating);
+    SET NEW.Rating = IF(NEW.Rating<0, OLD.Rating, NEW.Rating);
+    SET NEW.Good = IF(NEW.Good<0, OLD.Good, NEW.Good);
+END//
+
+DROP TRIGGER IF EXISTS ins_comment//
+CREATE TRIGGER ins_comment BEFORE INSERT ON mCOMMENT FOR EACH ROW
+BEGIN
+    SET NEW.Content = IF(length(NEW.Content)>=1, NEW.Content, null);
+    SET NEW.Rating = IF(NEW.Rating>10, 10, NEW.Rating);
+    SET NEW.Rating = IF(NEW.Rating<0, 0, NEW.Rating);
+    SET NEW.Good = IF(NEW.Good<0, 0, NEW.Good);
+END//
+DROP TRIGGER IF EXISTS upd_comment//
+CREATE TRIGGER upd_comment BEFORE UPDATE ON mCOMMENT FOR EACH ROW
+BEGIN
+    SET NEW.Content = IF(length(NEW.Content)>=1, NEW.Content, OLD.Content);
+    SET NEW.Ctime = IF(NEW.Ctime = OLD.Ctime, NEW.Ctime, OLD.Ctime);
+    SET NEW.Rating = IF(NEW.Rating>10, 10, NEW.Rating);
+    SET NEW.Rating = IF(NEW.Rating<0, OLD.Rating, NEW.Rating);
+    SET NEW.Good = IF(NEW.Good<0, OLD.Good, NEW.Good);
+END//
+DELIMITER ;
+
+
+SELECT * FROM mUSER;
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('admin', '1234', '0000000000', '관리자', '관리자');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test1', '1234', '1111111111', 'test1', 'test1');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test2', '1234', '2222222222', 'test2', 'test2');
+
+SELECT * FROM mFIELD;
+INSERT INTO mFIELD(Fname) VALUES ('알고리즘');
+INSERT INTO mFIELD(Fname) VALUES ('자료구조');
+INSERT INTO mFIELD(Fname) VALUES ('네트워크');
+
+SELECT * FROM mQUESTION;
+INSERT INTO mQUESTION(Title, Content) VALUES ('test1', '1');
+
+SELECT * FROM mCOMMENT;
+INSERT INTO mCOMMENT(Content) VALUES ('test');
+
+
