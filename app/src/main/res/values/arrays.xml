@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="favor">
+        <item>자료구조/알고리즘</item>
+        <item>모바일앱프로그래밍</item>
+        <item>컴퓨터시스템</item>
+        <item>네트워크</item>
+        <item>컴퓨터그래픽스</item>
+    </string-array>
+
+</resources>
