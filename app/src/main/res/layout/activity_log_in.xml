@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LogInActivity"
+    android:background="@color/colorWhite"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginBottom="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#da2127"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:text="Log In" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:text="아이디"/>
+
+    <EditText
+        android:id="@+id/inputID"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:gravity="bottom"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:text="비밀번호"/>
+
+    <EditText
+        android:id="@+id/inputPW"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"/>
+
+    <Button
+        android:id="@+id/LogInButton"
+        android:layout_margin="10dp"
+        android:background="#da2127"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:text="로그인"
+        android:onClick="doLogin"/>
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:gravity="bottom"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="회원이 아니세요?"/>
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_margin="10dp"
+        android:background="@drawable/login_signup_btn"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:textColor="#da2127"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:text="회원가입"
+        android:onClick="doLogin"/>
+
+
+</LinearLayout>
