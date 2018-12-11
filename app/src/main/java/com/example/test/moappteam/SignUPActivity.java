@@ -12,6 +12,7 @@ import android.widget.Spinner;
 public class SignUPActivity extends AppCompatActivity {
 
     Toolbar mToolbar = null;
+    private String[] interest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,13 @@ public class SignUPActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Spinner spinner = (Spinner)findViewById(R.id.favorSpinner);
+
+        interest = getResources().getStringArray(R.array.favor);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.favor,
+                //R.layout.spinner_interest);
                 android.R.layout.simple_spinner_dropdown_item );
                 //android.R.layout.simple_spinner_item );
 
