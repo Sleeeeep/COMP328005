@@ -31,6 +31,8 @@ public class DBClass {
                 urlConnection.setRequestProperty("Context_Type", "application/x-www-form-urlencoded;charset=UTF-8");
 
                 OutputStreamWriter osw = new OutputStreamWriter(urlConnection.getOutputStream());
+                //String param = "{\"title\": \"asdasd\", \"body\" : \"ddddddddd\"}";
+
                 sendmsg = "?hey=abc&really=123";
                 osw.write(sendmsg);
                 osw.flush();

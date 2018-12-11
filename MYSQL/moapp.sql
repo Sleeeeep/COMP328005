@@ -108,15 +108,15 @@ BEGIN
     SET NEW.Nick = IF(length(NEW.Nick)>=2, NEW.Nick, OLD.Nick);
 END//
 
-DROP TRIGGER IF EXISTS ins_field//
-CREATE TRIGGER ins_field BEFORE INSERT ON mFIELD FOR EACH ROW
+DROP TRIGGER IF EXISTS ins_category//
+CREATE TRIGGER ins_category BEFORE INSERT ON mCATEGORY FOR EACH ROW
 BEGIN
-	SET NEW.Fname = IF(length(NEW.Fname)>=1, NEW.Fname, null);
+	SET NEW.Cname = IF(length(NEW.Cname)>=1, NEW.Cname, null);
 END//
-DROP TRIGGER IF EXISTS upd_field//
-CREATE TRIGGER upd_field BEFORE UPDATE ON mFIELD FOR EACH ROW
+DROP TRIGGER IF EXISTS upd_category//
+CREATE TRIGGER upd_category BEFORE UPDATE ON mCATEGORY FOR EACH ROW
 BEGIN
-	SET NEW.Fname = IF(length(NEW.Fname)>=1, NEW.Fname, null);
+	SET NEW.Cname = IF(length(NEW.Cname)>=1, NEW.Cname, null);
 END//
 
 DROP TRIGGER IF EXISTS ins_question//
@@ -163,11 +163,11 @@ SELECT * FROM mUSER;
 INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('admin', '1234', '0000000000', '관리자', '관리자');
 INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test1', '1234', '1111111111', 'test1', 'test1');
 INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test2', '1234', '2222222222', 'test2', 'test2');
-
-SELECT * FROM mFIELD;
-INSERT INTO mFIELD(Fname) VALUES ('알고리즘');
-INSERT INTO mFIELD(Fname) VALUES ('자료구조');
-INSERT INTO mFIELD(Fname) VALUES ('네트워크');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test1', '1234', '123451234', 'test1', 'test1');
+SELECT * FROM mCATEGORY;
+INSERT INTO mCATEGORY(Cname) VALUES ('알고리즘');
+INSERT INTO mCATEGORY(Cname) VALUES ('자료구조');
+INSERT INTO mCATEGORY(Cname) VALUES ('네트워크');
 
 SELECT * FROM mQUESTION;
 INSERT INTO mQUESTION(Title, Content) VALUES ('test1', '1');

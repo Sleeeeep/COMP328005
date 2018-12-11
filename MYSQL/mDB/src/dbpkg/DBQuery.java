@@ -2,6 +2,8 @@ package dbpkg;
 
 import java.sql.*;
 import java.util.*;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 public class DBQuery {
 	private static DBQuery mDB = new DBQuery();
@@ -36,10 +38,12 @@ public class DBQuery {
 		return true;
 	}
 
-	public void selectQuery(ArrayList<String> column, String table, ArrayList<String> cond) {
+	public JSONArray selectQuery(ArrayList<String> column, String table, ArrayList<String> cond) {
+		JSONArray jArray = new JSONArray();
+		
 		if (table == null) {
 			System.err.println("select : no table");
-			return;
+			return jArray;
 		}
 
 		StringBuffer query = new StringBuffer();
@@ -66,23 +70,26 @@ public class DBQuery {
 					query.append(cond.get(i));
 			}
 		}
-//		System.out.println(query);
-
+		System.out.println(query);
 		try {
 			pstmt = conn.prepareStatement(query.toString());
 			rs = pstmt.executeQuery();
 			rsmd = rs.getMetaData();
 			int colNum = rsmd.getColumnCount();
-
+			
 			while (rs.next()) {
+				JSONObject jObject = new JSONObject();
+				
 				for (int i = 1; i <= colNum; i++) {
-					System.out.print(rs.getString(i) + " ");
+					jObject.put(rsmd.getColumnName(i), rs.getString(i));
 				}
-				System.out.println("");
+				jArray.add(jObject);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return jArray;
 	}
 
 	public int insertQuery(ArrayList<String> column, String table, ArrayList<String> value) {
@@ -117,7 +124,7 @@ public class DBQuery {
 			else
 				query.append(value.get(i) + ", ");
 		}
-//		System.out.println(query);
+		System.out.println(query);
 
 		try {
 			pstmt = conn.prepareStatement(query.toString());
@@ -195,7 +202,7 @@ public class DBQuery {
 					query.append(cond.get(i));
 			}
 		}
-//		System.out.println(query);
+		System.out.println(query);
 
 		try {
 			pstmt = conn.prepareStatement(query.toString());

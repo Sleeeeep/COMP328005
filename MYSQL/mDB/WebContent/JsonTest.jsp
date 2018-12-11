@@ -1,22 +1,104 @@
 <%@ page import="org.json.simple.JSONObject" %>
 <%@ page import="org.json.simple.JSONArray" %>
+<%@ page import="org.json.simple.JSONValue" %>
+<%@ page import="org.json.simple.parser.JSONParser" %>
+<%@ page import="java.util.*, java.lang.*, java.io.*" %>
+<%@ page import="dbpkg.DBQuery"%>
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 
 <%
 	request.setCharacterEncoding("utf-8");
-	String[] getAndroidData = { "", "" };
-	getAndroidData[0] = request.getParameter("hey");
-	getAndroidData[1] = request.getParameter("really");
-	System.out.println(getAndroidData[0] + " " + getAndroidData[1]);
+	response.setCharacterEncoding("utf-8");
+	// request에서 정보 parse
+	String str;
+	BufferedReader getAndroidData = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
+	StringBuffer paramData = new StringBuffer();
 	
-	JSONObject jsonMain = new JSONObject();
-	JSONArray jArray = new JSONArray();
-	JSONObject jObject = new JSONObject();
-	jObject.put("hey", "you_SUCK!!!!");
-	jObject.put("really", getAndroidData[0] + getAndroidData[1]);
-	jArray.add(0, jObject);
-	jsonMain.put("dataSend", jArray);
+	while((str = getAndroidData.readLine()) != null)
+		paramData.append(str);
 	
-	out.println(jsonMain);
+	JSONParser parser = new JSONParser();
+	Object requestObject = parser.parse(paramData.toString());
+	JSONObject temp = (JSONObject)requestObject;
+	JSONArray test = (JSONArray)(temp.get("query"));
+		
+	// DB 연결
+	DBQuery mDB = DBQuery.getDB();
+	if (!mDB.connectDB())
+		out.println("DB Connect Fail!");
+	else
+	{
+		// DB 쿼리에 쓰이는 변수들
+		ArrayList<String> column = new ArrayList<String>();
+		String table = null;
+		ArrayList<String> cond = new ArrayList<String>();
+		ArrayList<String> value = new ArrayList<String>();
+		// JSON 변수들
+		JSONArray JArray = new JSONArray();
+		JSONObject JObject = new JSONObject();
+		
+		if(((JSONObject)test.get(0)).get("Type").equals("SELECT"))
+		{
+			table = (((JSONObject)test.get(0)).get("Table")).toString();
+			if(((JSONObject)test.get(0)).containsKey("Col"))
+			{
+				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Col")).size(); i++)
+					column.add((((JSONArray)((JSONObject)test.get(0)).get("Col")).get(i)).toString());
+			}
+			if(((JSONObject)test.get(0)).containsKey("Cond"))
+			{
+				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Cond")).size(); i++)
+					cond.add((((JSONArray)((JSONObject)test.get(0)).get("Cond")).get(i)).toString());
+			}
+	
+			JArray = mDB.selectQuery(column, table, cond);
+			JObject.put("response", JArray);
+			out.println(JObject);
+		}
+		else if(((JSONObject)test.get(0)).get("Type").equals("DELETE"))
+		{
+			table = (((JSONObject)test.get(0)).get("Table")).toString();
+			if(((JSONObject)test.get(0)).containsKey("Cond"))
+			{
+				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Cond")).size(); i++)
+					cond.add((((JSONArray)((JSONObject)test.get(0)).get("Cond")).get(i)).toString());
+			}
+			
+			out.println(mDB.deleteQuery(table, cond));
+		}
+		else if(((JSONObject)test.get(0)).get("Type").equals("INSERT"))
+		{
+			table = (((JSONObject)test.get(0)).get("Table")).toString();
+			if(((JSONObject)test.get(0)).containsKey("Col"))
+			{
+				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Col")).size(); i++)
+					column.add((((JSONArray)((JSONObject)test.get(0)).get("Col")).get(i)).toString());
+			}
+			if(((JSONObject)test.get(0)).containsKey("Value"))
+			{
+				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Value")).size(); i++)
+					value.add((((JSONArray)((JSONObject)test.get(0)).get("Value")).get(i)).toString());
+			}
+			
+			out.println(mDB.insertQuery(column, table, value));
+		}
+		else if(((JSONObject)test.get(0)).get("Type").equals("UPDATE"))
+		{
+			table = (((JSONObject)test.get(0)).get("Table")).toString();
+			if(((JSONObject)test.get(0)).containsKey("Cond"))
+			{
+				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Cond")).size(); i++)
+					cond.add((((JSONArray)((JSONObject)test.get(0)).get("Cond")).get(i)).toString());
+			}
+			if(((JSONObject)test.get(0)).containsKey("Value"))
+			{
+				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Value")).size(); i++)
+					value.add((((JSONArray)((JSONObject)test.get(0)).get("Value")).get(i)).toString());
+			}
+			
+			out.println(mDB.updateQuery(value, table, cond));
+		}
+	}
 %>
