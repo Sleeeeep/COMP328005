@@ -9,21 +9,28 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
-        android:background="@drawable/mainpane"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <include
-            layout="@layout/question_main"
+        <LinearLayout
+            android:background="@drawable/mainpane"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/question_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </ScrollView>
 
 </LinearLayout>
