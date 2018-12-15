@@ -9,28 +9,29 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ScrollView
+
+    <LinearLayout
+        android:background="@drawable/mainpane"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:background="@drawable/mainpane"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include
-                layout="@layout/question_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-
-        <Button
-            android:id="@+id/button"
+        <TextView
+            android:text="최근질문"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <include
+            layout="@layout/question_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-    </ScrollView>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
