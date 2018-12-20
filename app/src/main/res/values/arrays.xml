@@ -9,4 +9,11 @@
         <item>컴퓨터그래픽스</item>
     </string-array>
 
+    <string-array name="major">
+        <item>컴퓨터학부</item>
+        <item>전자공학부</item>
+        <item>전기공학부</item>
+        <item>모바일공학부</item>
+    </string-array>
+
 </resources>

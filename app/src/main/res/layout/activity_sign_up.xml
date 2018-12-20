@@ -3,174 +3,193 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUPActivity"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
-    android:background="@color/colorWhite">
+    tools:context=".SignUPActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/signUpToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:background="@color/colorPrimary"
-        android:theme="?attr/actionBarTheme" >
+        android:theme="?attr/actionBarTheme">
+
         <ImageView
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo" />
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/textView"
-        android:textStyle="bold"
-        android:textColor="@color/textDark"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="아이디" />
-
-    <EditText
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15dp">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:textStyle="bold"
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호" />
-
-    <EditText
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:textStyle="bold"
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 확인" />
-
-    <EditText
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:textStyle="bold"
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="닉네임" />
-
-    <EditText
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:textStyle="bold"
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="학번" />
-
-    <EditText
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:textStyle="bold"
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이름" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:textColor="@color/textDark"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/deleteName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="20dp"
-            android:background="@android:color/transparent"
-            android:visibility="visible"
-            tools:srcCompat="@drawable/outline_clear_black_18" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="아이디"
+                android:textColor="@color/textDark"
+                android:textStyle="bold" />
 
-    </FrameLayout>
+            <EditText
+                android:id="@+id/id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:maxLength="20"
+                android:textColor="@color/textDark" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="비밀번호"
+                android:textColor="@color/textDark"
+                android:textStyle="bold" />
 
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:textColor="@color/textDark" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:textStyle="bold"
-        android:textColor="@color/textDark"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="관심분야" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="비밀번호 확인"
+                android:textColor="@color/textDark"
+                android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/favorSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="10dp"
-        android:textColor="@color/colorWhite" />
+            <EditText
+                android:id="@+id/confirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:textColor="@color/textDark" />
 
-    <Button
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorWhite"
-        android:text="회 원 가 입"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="닉네임"
+                android:textColor="@color/textDark"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/nickName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:maxLength="8"
+                android:textColor="@color/textDark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="학번"
+                android:textColor="@color/textDark"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/sId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/textDark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="이름"
+                android:textColor="@color/textDark"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:maxLength="5"
+                android:textColor="@color/textDark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="전공"
+                android:textColor="@color/textDark"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/sDepSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="관심분야"
+                android:textColor="@color/textDark"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/favorSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/signUpBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/colorPrimary"
+                android:onClick="signUpClicked"
+                android:text="회 원 가 입"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

@@ -22,7 +22,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:text=" 실시간 인기 질문"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -42,6 +41,7 @@
             android:src="@drawable/raise_hand" />
 
         <TextView
+            android:id="@+id/hotQuestionId"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -50,6 +50,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/hotQuestionTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -60,11 +61,13 @@
 
 
     <TextView
+        android:id="@+id/hotQuestionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
 
     <TextView
+        android:id="@+id/hotQuestionComponent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
@@ -73,13 +76,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/hotQuestionInterest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="" />
 
-        <ImageButton
+        <ImageView
             android:layout_gravity="center"
             android:background="#00ffffff"
             android:src="@drawable/comment"
@@ -87,7 +92,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp" />
 
-        <Button
+        <TextView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:background="@color/colorWhite"
@@ -97,7 +102,7 @@
             android:textColor="#dd1111"
             android:layout_gravity="center"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center"
@@ -106,7 +111,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/like" />
 
-        <Button
+        <TextView
             android:layout_width="15sp"
             android:layout_height="15sp"
             android:background="@color/colorWhite"
@@ -130,6 +135,7 @@
             android:src="@drawable/raise_hand" />
 
         <TextView
+            android:id="@+id/hotQuestionId1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -138,6 +144,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/hotQuestionTime1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -148,11 +155,13 @@
 
 
     <TextView
+        android:id="@+id/hotQuestionTitle1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
 
     <TextView
+        android:id="@+id/hotQuestionComponent1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
@@ -163,12 +172,13 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/hotQuestionInterest1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="" />
 
-        <ImageButton
+        <ImageView
             android:layout_gravity="center"
             android:background="#00ffffff"
             android:src="@drawable/comment"
@@ -176,7 +186,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp" />
 
-        <Button
+        <TextView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:background="@color/colorWhite"
@@ -186,7 +196,7 @@
             android:textColor="#dd1111"
             android:layout_gravity="center"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center"
@@ -195,7 +205,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/like" />
 
-        <Button
+        <TextView
             android:layout_width="15sp"
             android:layout_height="15sp"
             android:background="@color/colorWhite"

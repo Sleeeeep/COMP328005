@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/mainpane"
@@ -43,6 +42,7 @@
             android:src="@drawable/raise_hand" />
 
         <TextView
+            android:id="@+id/interQuestionId"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -51,6 +51,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/interQuestionTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -61,11 +62,13 @@
 
 
     <TextView
+        android:id="@+id/interQuestionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
 
     <TextView
+        android:id="@+id/interQuestionComponent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
@@ -76,12 +79,13 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/interQuestionInter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="" />
 
-        <ImageButton
+        <ImageView
             android:layout_gravity="center"
             android:background="#00ffffff"
             android:src="@drawable/comment"
@@ -89,7 +93,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp" />
 
-        <Button
+        <TextView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:background="@color/colorWhite"
@@ -99,7 +103,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_gravity="center"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center"
@@ -108,7 +112,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/like" />
 
-        <Button
+        <TextView
             android:layout_width="15sp"
             android:layout_height="15sp"
             android:background="@color/colorWhite"
@@ -133,6 +137,7 @@
             android:src="@drawable/raise_hand" />
 
         <TextView
+            android:id="@+id/interQuestionId1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -141,6 +146,7 @@
             android:textSize="20sp"/>
 
         <TextView
+            android:id="@+id/interQuestionTime1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -151,11 +157,13 @@
 
 
     <TextView
+        android:id="@+id/interQuestionTitle1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
 
     <TextView
+        android:id="@+id/interQuestionComponent1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
@@ -166,12 +174,13 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/interQuestionInter1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="" />
 
-        <ImageButton
+        <ImageView
             android:layout_gravity="center"
             android:background="#00ffffff"
             android:src="@drawable/comment"
@@ -179,7 +188,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp" />
 
-        <Button
+        <TextView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:background="@color/colorWhite"
@@ -189,7 +198,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_gravity="center"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center"
@@ -198,7 +207,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/like" />
 
-        <Button
+        <TextView
             android:layout_width="15sp"
             android:layout_height="15sp"
             android:background="@color/colorWhite"

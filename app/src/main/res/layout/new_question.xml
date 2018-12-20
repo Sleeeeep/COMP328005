@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/mainpane"
@@ -16,19 +14,18 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/newmark"/>
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/newmark" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_weight="1"
             android:text=" 새로 올라온 질문"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -45,6 +42,7 @@
             android:src="@drawable/raise_hand" />
 
         <TextView
+            android:id="@+id/newQuestionId"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -53,21 +51,24 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/newQuestionTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="시간"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
     </LinearLayout>
 
 
     <TextView
+        android:id="@+id/newQuestionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
 
     <TextView
+        android:id="@+id/newQuestionComponent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
@@ -78,30 +79,32 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/newQuestionInterest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="" />
 
-        <ImageButton
-            android:layout_gravity="center"
-            android:background="#00ffffff"
-            android:src="@drawable/comment"
-            android:scaleType="fitXY"
-            android:layout_width="15dp"
-            android:layout_height="15dp" />
-
-        <Button
+        <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:background="#00ffffff"
+            android:scaleType="fitXY"
+            android:src="@drawable/comment" />
+
+        <TextView
+            android:id="@+id/newQuestionComment"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
             android:background="@color/colorWhite"
             android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
             android:textColor="#dd1111"
-            android:layout_gravity="center"/>
+            android:textSize="10sp" />
 
-        <ImageButton
+        <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center"
@@ -110,23 +113,24 @@
             android:scaleType="fitXY"
             android:src="@drawable/like" />
 
-        <Button
+        <TextView
+            android:id="@+id/newQuestionLike"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="15sp"
             android:layout_height="15sp"
+            android:layout_gravity="center"
             android:background="@color/colorWhite"
             android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
             android:textColor="#062ff9"
-            android:layout_gravity="center"/>
+            android:textSize="10sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -135,6 +139,7 @@
             android:src="@drawable/raise_hand" />
 
         <TextView
+            android:id="@+id/newQuestionId1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -143,21 +148,24 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/newQuestionTime1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="시간"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
     </LinearLayout>
 
 
     <TextView
+        android:id="@+id/newQuestionTitle1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
 
     <TextView
+        android:id="@+id/newQuestionComponent1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="" />
@@ -168,28 +176,29 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/newQuestionInterest1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="" />
 
         <ImageButton
-            android:layout_gravity="center"
-            android:background="#00ffffff"
-            android:src="@drawable/comment"
-            android:scaleType="fitXY"
-            android:layout_width="15dp"
-            android:layout_height="15dp" />
-
-        <Button
             android:layout_width="15dp"
             android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:background="#00ffffff"
+            android:scaleType="fitXY"
+            android:src="@drawable/comment" />
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
             android:background="@color/colorWhite"
             android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
             android:textColor="#dd1111"
-            android:layout_gravity="center"/>
+            android:textSize="10sp" />
 
         <ImageButton
             android:layout_width="15dp"
@@ -201,14 +210,14 @@
             android:src="@drawable/like" />
 
         <Button
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="15sp"
             android:layout_height="15sp"
+            android:layout_gravity="center"
             android:background="@color/colorWhite"
             android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
             android:textColor="#062ff9"
-            android:layout_gravity="center"/>
+            android:textSize="10sp" />
 
     </LinearLayout>
 
