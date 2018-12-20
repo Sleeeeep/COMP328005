@@ -1,7 +1,6 @@
 package com.example.test.moappteam;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ public class SpeakListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
         final Context context = parent.getContext();
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
@@ -38,6 +36,7 @@ public class SpeakListViewAdapter extends BaseAdapter {
         TextView classifyTextView = (TextView) convertView.findViewById(R.id.speakClassify);
         TextView replyNumTextView = (TextView) convertView.findViewById(R.id.speakReplyNum);
         TextView likeNumTextView = (TextView) convertView.findViewById(R.id.speakLikeNum);
+        TextView textTextView = (TextView) convertView.findViewById(R.id.speakText);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         SpeakListItem speakListItem = speakListItemList.get(position);
@@ -49,6 +48,7 @@ public class SpeakListViewAdapter extends BaseAdapter {
         classifyTextView.setText(speakListItem.getClassify());
         replyNumTextView.setText(""+speakListItem.getReplyNum());
         likeNumTextView.setText(""+speakListItem.getLikeNum());
+        textTextView.setText(speakListItem.getText());
 
         return convertView;
     }

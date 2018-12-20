@@ -21,72 +21,10 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
+    <ListView
+        android:id="@+id/replyList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/userWho"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="User"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/speakTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Title"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Text"
-                android:textSize="20sp" />
-
-            <ListView
-                android:id="@+id/replyList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"/>
-
-            <EditText
-                android:id="@+id/newReply"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:hint="댓글"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:scrollbars="none"/>
 
 </LinearLayout>
