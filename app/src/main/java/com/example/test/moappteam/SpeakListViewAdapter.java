@@ -35,6 +35,9 @@ public class SpeakListViewAdapter extends BaseAdapter {
         TextView titleTextView = (TextView) convertView.findViewById(R.id.speakTitle);
         TextView userTextView = (TextView) convertView.findViewById(R.id.speakWho);
         TextView timeTextView = (TextView) convertView.findViewById(R.id.speakTime);
+        TextView classifyTextView = (TextView) convertView.findViewById(R.id.speakClassify);
+        TextView replyNumTextView = (TextView) convertView.findViewById(R.id.speakReplyNum);
+        TextView likeNumTextView = (TextView) convertView.findViewById(R.id.speakLikeNum);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         SpeakListItem speakListItem = speakListItemList.get(position);
@@ -43,6 +46,9 @@ public class SpeakListViewAdapter extends BaseAdapter {
         titleTextView.setText(speakListItem.getTitle());
         userTextView.setText(speakListItem.getUser());
         timeTextView.setText(speakListItem.getTime());
+        classifyTextView.setText(speakListItem.getClassify());
+        replyNumTextView.setText(""+speakListItem.getReplyNum());
+        likeNumTextView.setText(""+speakListItem.getLikeNum());
 
         return convertView;
     }
@@ -60,12 +66,15 @@ public class SpeakListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String user, String time) {
+    public void addItem(String title, String user, String time, String classify, int replyNum, int likeNum) {
         SpeakListItem item = new SpeakListItem();
 
         item.setTitle(title);
         item.setUser(user);
         item.setTime(time);
+        item.setClassify(classify);
+        item.setReplyNum(replyNum);
+        item.setLikeNum(likeNum);
 
         speakListItemList.add(item);
     }

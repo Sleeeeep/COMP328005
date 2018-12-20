@@ -1,22 +1,15 @@
 package com.example.test.moappteam;
 
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-
-import java.util.ArrayList;
 
 
 /**
@@ -28,7 +21,6 @@ public class SpeakFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,9 +29,10 @@ public class SpeakFragment extends Fragment {
         ListView speakListView = view.findViewById(R.id.speakListView);
         SpeakListViewAdapter adapter = new SpeakListViewAdapter();
         speakListView.setAdapter(adapter);
-        Resources res = getResources();
 
-        adapter.addItem("title", "user", "12:00:00");
+        // example
+        adapter.addItem("title", "user", "12:00:00", "일반", 1, 1);
+        adapter.addItem("title2", "user2", "12:00:56", "특수", 0, 3);
 
         speakListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
