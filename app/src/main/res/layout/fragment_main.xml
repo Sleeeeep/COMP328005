@@ -23,17 +23,17 @@
             android:padding="10dp">
 
             <include
-                layout="@layout/question_main"
+                layout="@layout/interest_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <include
-                layout="@layout/newquestion"
+                layout="@layout/new_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <include
-                layout="@layout/todayrecommend"
+                layout="@layout/hot_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
