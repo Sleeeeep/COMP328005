@@ -20,7 +20,7 @@ CREATE TABLE mUSER(
     Dno INT,
 	PRIMARY KEY(ID),
     UNIQUE(Sid), UNIQUE(Nick),
-	FOREIGN KEY(Dno) REFERENCES mDEPARTMENT(Dnumber) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY(Dno) REFERENCES mDEPARTMENT(Dnumber) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 DROP TABLE IF EXISTS mCATEGORY;
@@ -167,23 +167,30 @@ DELIMITER ;
 
 DROP VIEW IF EXISTS Favor_Qlist;
 CREATE VIEW Favor_Qlist AS
-	SELECT U.id, C.Uid, Qnumber, Title, Good, Cname FROM (SELECT Id, Cno FROM mUSER JOIN mFAVOR ON Id=Uid) U, (SELECT Uid, Qnumber, Title, Good, Cno, Cname FROM mCATEGORY JOIN (SELECT Uid, Qnumber, Title, Good, Cno FROM mQUESTION JOIN mASK ON Qno=Qnumber) Q ON Cno=Cnumber) C WHERE U.Cno=C.Cno;
-SELECT Uid, Qnumber, Title, Good, Cname FROM Favor_Qlist WHERE Id='test1';
+	SELECT U.id, C.Uid, Qnumber, Title, Good, Cname, Qtime FROM (SELECT Id, Cno FROM mUSER JOIN mFAVOR ON Id=Uid) U, (SELECT Uid, Qnumber, Title, Good, Cno, Cname, Qtime FROM mCATEGORY JOIN (SELECT Uid, Qnumber, Title, Good, Cno, Qtime FROM mQUESTION JOIN mASK ON Qno=Qnumber) Q ON Cno=Cnumber) C WHERE U.Cno=C.Cno;
+SELECT Uid, Qnumber, Title, Good, Cname, Qtime FROM Favor_Qlist WHERE Id='test1';
 
 DROP VIEW IF EXISTS NEW_Qlist;
 CREATE VIEW NEW_Qlist AS
-	SELECT Uid, Qnumber, Title, Good, Cname FROM (SELECT Uid, Qnumber, Title, Good, Cno, Qtime FROM mQUESTION JOIN mASK ON Qno=Qnumber ORDER BY Qtime DESC) Q JOIN mCATEGORY ON Cno=Cnumber;
+	SELECT Uid, Qnumber, Title, Good, Cname, Qtime FROM (SELECT Uid, Qnumber, Title, Good, Cno, Qtime FROM mQUESTION JOIN mASK ON Qno=Qnumber ORDER BY Qtime DESC) Q JOIN mCATEGORY ON Cno=Cnumber;
 SELECT * FROM NEW_Qlist;
 
 DROP VIEW IF EXISTS HOT_Qlist;
 CREATE VIEW HOT_Qlist AS
-	SELECT Uid, Qnumber, Title, Good, Cname, Cnt FROM mCATEGORY JOIN (SELECT Uid, Qnumber, Title, Cno, Good, Cnt FROM mASK JOIN (SELECT Qnumber, Title, Cno, Good, Cnt FROM mQUESTION JOIN (SELECT Qno, COUNT(*) AS Cnt FROM mREPLY GROUP BY Qno ORDER BY COUNT(*) DESC) R ON Qnumber=Qno ORDER BY R.cnt DESC) Q ON Qno=Qnumber) A ON Cno=Cnumber ORDER BY Cnt DESC;
+	SELECT Uid, Qnumber, Title, Good, Cname, Cnt, Qtime FROM mCATEGORY JOIN (SELECT Uid, Qnumber, Title, Cno, Good, Cnt, Qtime FROM mASK JOIN (SELECT Qnumber, Title, Cno, Good, Cnt, Qtime FROM mQUESTION JOIN (SELECT Qno, COUNT(*) AS Cnt FROM mREPLY GROUP BY Qno ORDER BY COUNT(*) DESC) R ON Qnumber=Qno ORDER BY R.cnt DESC) Q ON Qno=Qnumber) A ON Cno=Cnumber ORDER BY Cnt DESC;
 SELECT * FROM HOT_Qlist;
+
+
+
 
 SELECT * FROM mUSER;
 INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('admin', '1234', '0000000000', '관리자', '관리자');
-INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test1', '1234', '1111111111', 'test1', 'test1');
-INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test2', '1234', '2222222222', 'test2', 'test2');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('jwjw', '1111', '2013105046', '박재운', '박재운');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('bkbk', '2222', '2016110679', '정보경', '정보경');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('sisi', '3333', '2013105006', '황선익', '황선익');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('grgr', '4444', '2013097088', '김규래', '김규래');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test1', '0000', '1231231231', 'test1', '테스트1');
+INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test2', '0000', '2342342342', 'test2', '테스트2');
 
 SELECT * FROM mCATEGORY;
 INSERT INTO mCATEGORY(Cname) VALUES ('알고리즘');

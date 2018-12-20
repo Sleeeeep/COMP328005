@@ -1,5 +1,7 @@
 package com.example.test.moappteam.DBpkg;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -8,7 +10,7 @@ import java.net.URL;
 
 public class DBClass {
     private String dbURL = null;
-    private HttpURLConnection urlConnection = null;
+    static private HttpURLConnection urlConnection = null;
 
     public DBClass() {
         dbURL = "http://10.0.2.2:8080/mDB/JsonTest.jsp?";
@@ -45,13 +47,22 @@ public class DBClass {
         }
     }
 
-    public BufferedReader getBuffer(){
+    public JSONObject getData() {
+        JSONObject json = null;
+
         try {
-            return new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+            BufferedReader bufreader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+            String line = null;
+            String page = "";
+
+            while ((line = bufreader.readLine()) != null) {
+                page += line;
+            }
+            json = new JSONObject(page);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e)
-        {
-            return null;
-        }
+
+        return json;
     }
 }

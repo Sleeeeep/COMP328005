@@ -65,8 +65,8 @@
 				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Cond")).size(); i++)
 					cond.add((((JSONArray)((JSONObject)test.get(0)).get("Cond")).get(i)).toString());
 			}
-			
-			out.println(mDB.deleteQuery(table, cond));
+			JObject.put("response", String.valueOf(mDB.deleteQuery(table, cond)));
+			out.println(JObject);
 		}
 		else if(((JSONObject)test.get(0)).get("Type").equals("INSERT"))
 		{
@@ -81,8 +81,8 @@
 				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Value")).size(); i++)
 					value.add((((JSONArray)((JSONObject)test.get(0)).get("Value")).get(i)).toString());
 			}
-			
-			out.println(mDB.insertQuery(column, table, value));
+			JObject.put("response", String.valueOf(mDB.insertQuery(column, table, value)));
+			out.println(JObject);
 		}
 		else if(((JSONObject)test.get(0)).get("Type").equals("UPDATE"))
 		{
@@ -97,8 +97,8 @@
 				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Value")).size(); i++)
 					value.add((((JSONArray)((JSONObject)test.get(0)).get("Value")).get(i)).toString());
 			}
-			
-			out.println(mDB.updateQuery(value, table, cond));
+			JObject.put("response", String.valueOf(mDB.updateQuery(value, table, cond)));
+			out.println(JObject);
 		}
 		else if(((JSONObject)test.get(0)).get("Type").equals("CUSTOM"))
 		{
