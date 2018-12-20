@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="Title"
+            android:text="Name"
             android:id="@+id/speakWho"
             android:textSize="20sp" />
 
@@ -72,7 +72,6 @@
         <TextView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:background="@color/colorWhite"
             android:text="0"
             android:textSize="10sp"
             android:textColor="#dd1111"
@@ -91,7 +90,6 @@
         <TextView
             android:layout_width="15sp"
             android:layout_height="15sp"
-            android:background="@color/colorWhite"
             android:text="0"
             android:textSize="10sp"
             android:textColor="#062ff9"
