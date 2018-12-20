@@ -5,7 +5,7 @@ import java.util.*;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
-public class DBQuery {
+public class DBQuery { 	
 	private static DBQuery mDB = new DBQuery();
 
 	public DBQuery() {
@@ -92,6 +92,30 @@ public class DBQuery {
 		return jArray;
 	}
 
+	public JSONArray customQuery(String query) {
+		JSONArray jArray = new JSONArray();
+		System.out.println(query);
+		try {
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			rsmd = rs.getMetaData();
+			int colNum = rsmd.getColumnCount();
+			
+			while (rs.next()) {
+				JSONObject jObject = new JSONObject();
+				
+				for (int i = 1; i <= colNum; i++) {
+					jObject.put(rsmd.getColumnName(i), rs.getString(i));
+				}
+				jArray.add(jObject);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return jArray;
+	}
+	
 	public int insertQuery(ArrayList<String> column, String table, ArrayList<String> value) {
 		int result = 0;
 
