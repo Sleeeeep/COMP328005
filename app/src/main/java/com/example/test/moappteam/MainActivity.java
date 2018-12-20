@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.login:
                 // TODO : process the click event for action_search item.
 
-                Intent intent = new Intent(this,SignUPActivity.class);
+                Intent intent = new Intent(this,LogInActivity.class);
                 startActivity(intent);
                 return true ;
             // ...
