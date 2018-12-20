@@ -21,8 +21,6 @@
             android:src="@drawable/logo"/>
     </android.support.v7.widget.Toolbar>
 
-
-
     <TextView
         android:id="@+id/textView"
         android:textStyle="bold"
@@ -124,6 +122,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <EditText
+            android:textColor="@color/textDark"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <ImageButton
             android:id="@+id/deleteName"
             android:layout_width="wrap_content"
@@ -133,14 +139,6 @@
             android:background="@android:color/transparent"
             android:visibility="visible"
             tools:srcCompat="@drawable/outline_clear_black_18" />
-
-        <EditText
-            android:textColor="@color/textDark"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
     </FrameLayout>
 
@@ -168,9 +166,10 @@
         android:layout_marginBottom="0dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite"
         android:text="회 원 가 입"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
