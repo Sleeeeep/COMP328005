@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class DBClass {
     private String dbURL = null;
-    static private HttpURLConnection urlConnection = null;
+    private HttpURLConnection urlConnection = null;
 
     public DBClass() {
         dbURL = "http://10.0.2.2:8080/mDB/JsonTest.jsp?";

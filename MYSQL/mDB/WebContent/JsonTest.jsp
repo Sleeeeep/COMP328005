@@ -100,5 +100,11 @@
 			
 			out.println(mDB.updateQuery(value, table, cond));
 		}
+		else if(((JSONObject)test.get(0)).get("Type").equals("CUSTOM"))
+		{
+			JArray = mDB.customQuery((((JSONObject)test.get(0)).get("Query")).toString());
+			JObject.put("response", JArray);
+			out.println(JObject);
+		}
 	}
 %>

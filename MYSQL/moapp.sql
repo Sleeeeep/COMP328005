@@ -36,10 +36,12 @@ CREATE TABLE mQUESTION(
     Qnumber INT auto_increment,
     Title VARCHAR(30) NOT NULL,
     Content VARCHAR(2000) NOT NULL,
+    Cno INT,
     Qtime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Rating DECIMAL(2,1) DEFAULT 0,
     Good INT DEFAULT 0,
-    PRIMARY KEY(Qnumber)
+    PRIMARY KEY(Qnumber),
+    FOREIGN KEY(Cno) REFERENCES mCATEGORY(Cnumber) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 DROP TABLE IF EXISTS mCOMMENT;
@@ -87,6 +89,9 @@ CREATE TABLE mREPLY(
     FOREIGN KEY(Qno) REFERENCES mQUESTION(Qnumber) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(Cno) REFERENCES mCOMMENT(Cnumber) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+
+
 
 DELIMITER //
 DROP TRIGGER IF EXISTS ins_users//
@@ -159,18 +164,81 @@ END//
 DELIMITER ;
 
 
+
+DROP VIEW IF EXISTS Favor_Qlist;
+CREATE VIEW Favor_Qlist AS
+	SELECT U.id, C.Uid, Qnumber, Title, Good, Cname FROM (SELECT Id, Cno FROM mUSER JOIN mFAVOR ON Id=Uid) U, (SELECT Uid, Qnumber, Title, Good, Cno, Cname FROM mCATEGORY JOIN (SELECT Uid, Qnumber, Title, Good, Cno FROM mQUESTION JOIN mASK ON Qno=Qnumber) Q ON Cno=Cnumber) C WHERE U.Cno=C.Cno;
+SELECT Uid, Qnumber, Title, Good, Cname FROM Favor_Qlist WHERE Id='test1';
+
+DROP VIEW IF EXISTS NEW_Qlist;
+CREATE VIEW NEW_Qlist AS
+	SELECT Uid, Qnumber, Title, Good, Cname FROM (SELECT Uid, Qnumber, Title, Good, Cno, Qtime FROM mQUESTION JOIN mASK ON Qno=Qnumber ORDER BY Qtime DESC) Q JOIN mCATEGORY ON Cno=Cnumber;
+SELECT * FROM NEW_Qlist;
+
+DROP VIEW IF EXISTS HOT_Qlist;
+CREATE VIEW HOT_Qlist AS
+	SELECT Uid, Qnumber, Title, Good, Cname, Cnt FROM mCATEGORY JOIN (SELECT Uid, Qnumber, Title, Cno, Good, Cnt FROM mASK JOIN (SELECT Qnumber, Title, Cno, Good, Cnt FROM mQUESTION JOIN (SELECT Qno, COUNT(*) AS Cnt FROM mREPLY GROUP BY Qno ORDER BY COUNT(*) DESC) R ON Qnumber=Qno ORDER BY R.cnt DESC) Q ON Qno=Qnumber) A ON Cno=Cnumber ORDER BY Cnt DESC;
+SELECT * FROM HOT_Qlist;
+
 SELECT * FROM mUSER;
 INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('admin', '1234', '0000000000', '관리자', '관리자');
 INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test1', '1234', '1111111111', 'test1', 'test1');
 INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test2', '1234', '2222222222', 'test2', 'test2');
-INSERT INTO mUSER(Id, Pw, Sid, Name, Nick) VALUES ('test1', '1234', '123451234', 'test1', 'test1');
+
 SELECT * FROM mCATEGORY;
 INSERT INTO mCATEGORY(Cname) VALUES ('알고리즘');
 INSERT INTO mCATEGORY(Cname) VALUES ('자료구조');
 INSERT INTO mCATEGORY(Cname) VALUES ('네트워크');
+INSERT INTO mCATEGORY(Cname) VALUES ('컴퓨터구조');
+INSERT INTO mCATEGORY(Cname) VALUES ('자바');
+INSERT INTO mCATEGORY(Cname) VALUES ('운영체제');
+INSERT INTO mCATEGORY(Cname) VALUES ('시스템');
+INSERT INTO mCATEGORY(Cname) VALUES ('데이터베이스');
+INSERT INTO mCATEGORY(Cname) VALUES ('인공지능');
+INSERT INTO mCATEGORY(Cname) VALUES ('빅데이터');
+INSERT INTO mCATEGORY(Cname) VALUES ('웹');
+INSERT INTO mCATEGORY(Cname) VALUES ('보안');
+INSERT INTO mCATEGORY(Cname) VALUES ('로봇');
+INSERT INTO mCATEGORY(Cname) VALUES ('소프트웨어설계');
+INSERT INTO mCATEGORY(Cname) VALUES ('미디어아트');
+INSERT INTO mCATEGORY(Cname) VALUES ('병렬컴퓨팅');
 
 SELECT * FROM mQUESTION;
-INSERT INTO mQUESTION(Title, Content) VALUES ('test1', '1');
+INSERT INTO mQUESTION(Title, Cno, Content) VALUES ('test1', 5, '1');
+INSERT INTO mQUESTION(Title, Cno, Content) VALUES ('test2', 2, 'asdasdasfafasfaseqwzxvnadlfdsjfkljqporiqwoepqw');
+INSERT INTO mQUESTION(Title, Cno, Content) VALUES ('test3', 4, '가나다라마바사아자ㅏ차카타파');
+INSERT INTO mQUESTION(Title, Cno, Content) VALUES ('test4', 10, 'asdasfasfasafasfasfasf팜나람나갑작ㅂ잗ㅂㅈ');
+INSERT INTO mQUESTION(Title, Cno, Content) VALUES ('test5', 1, 'ㅠㅠ');
 
 SELECT * FROM mCOMMENT;
 INSERT INTO mCOMMENT(Content) VALUES ('test');
+INSERT INTO mCOMMENT(Content) VALUES ('test');
+INSERT INTO mCOMMENT(Content) VALUES ('test');
+INSERT INTO mCOMMENT(Content) VALUES ('test');
+INSERT INTO mCOMMENT(Content) VALUES ('test');
+INSERT INTO mCOMMENT(Content) VALUES ('test');
+INSERT INTO mCOMMENT(Content) VALUES ('test');
+
+
+SELECT * FROM mFAVOR;
+INSERT INTO mFAVOR(Uid, Cno) VALUES ('test1', 2);
+INSERT INTO mFAVOR(Uid, Cno) VALUES ('test1', 3);
+INSERT INTO mFAVOR(Uid, Cno) VALUES ('test1', 4);
+INSERT INTO mFAVOR(Uid, Cno) VALUES ('test1', 5);
+INSERT INTO mFAVOR(Uid, Cno) VALUES ('test2', 10);
+
+SELECT * FROM mASK;
+INSERT INTO mASK(Uid, Qno) VALUES ('test1', 1);
+INSERT INTO mASK(Uid, Qno) VALUES ('test1', 2);
+INSERT INTO mASK(Uid, Qno) VALUES ('test2', 3);
+INSERT INTO mASK(Uid, Qno) VALUES ('test1', 4);
+INSERT INTO mASK(Uid, Qno) VALUES ('test1', 5);
+
+SELECT * FROM mREPLY;
+INSERT INTO mREPLY(Qno, Cno) VALUES (1, 1);
+INSERT INTO mREPLY(Qno, Cno) VALUES (1, 2);
+INSERT INTO mREPLY(Qno, Cno) VALUES (1, 3);
+INSERT INTO mREPLY(Qno, Cno) VALUES (1, 4);
+INSERT INTO mREPLY(Qno, Cno) VALUES (2, 5);
+INSERT INTO mREPLY(Qno, Cno) VALUES (2, 6);
+
