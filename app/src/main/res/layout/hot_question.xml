@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@drawable/mainpane"
+    android:orientation="vertical"
     android:padding="10dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="인기 질문"
+        android:textStyle="bold" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <ImageView
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:text="id"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:padding="10dp"
-            android:textSize="30sp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="id"
+            android:textSize="30sp" />
 
     </LinearLayout>
 
 
     <TextView
-        android:text=""
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="" />
 
     <TextView
-        android:text=""
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,9 +52,9 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="" />
 
         <ImageButton
@@ -57,56 +62,56 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:text="0"
-            android:textSize="10sp"
-            android:background="@color/colorWhite"
             android:layout_width="15dp"
-            android:layout_height="15dp" />
+            android:layout_height="15dp"
+            android:background="@color/colorWhite"
+            android:text="0"
+            android:textSize="10sp" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
-            android:text="0"
-            android:textSize="10sp"
-            android:background="@color/colorWhite"
             android:layout_width="15sp"
-            android:layout_height="15sp" />
+            android:layout_height="15sp"
+            android:background="@color/colorWhite"
+            android:text="0"
+            android:textSize="10sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <ImageView
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:text="id"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:padding="10dp"
-            android:textSize="30sp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="id"
+            android:textSize="30sp" />
 
     </LinearLayout>
 
 
     <TextView
-        android:text=""
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="" />
 
     <TextView
-        android:text=""
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,9 +119,9 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="" />
 
         <ImageButton
@@ -124,22 +129,22 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:text="0"
-            android:textSize="10sp"
-            android:background="@color/colorWhite"
             android:layout_width="15dp"
-            android:layout_height="15dp" />
+            android:layout_height="15dp"
+            android:background="@color/colorWhite"
+            android:text="0"
+            android:textSize="10sp" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
-            android:text="0"
-            android:textSize="10sp"
-            android:background="@color/colorWhite"
             android:layout_width="15sp"
-            android:layout_height="15sp" />
+            android:layout_height="15sp"
+            android:background="@color/colorWhite"
+            android:text="0"
+            android:textSize="10sp" />
 
     </LinearLayout>
 

@@ -30,7 +30,7 @@ public class MainFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_main,container,false);
 
-        Button button = (Button) view.findViewById(R.id.scrollMain).findViewById(R.id.scrollInLay).findViewById(R.id.button);
+        Button button = (Button) view.findViewById(R.id.scrollInLay).findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
