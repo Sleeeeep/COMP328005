@@ -30,191 +30,212 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/hotQ1"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/raise_hand" />
-
-        <TextView
-            android:id="@+id/hotQuestionId"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="id"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/hotQuestionTime"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="시간"
-            android:textSize="10sp"/>
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/hotQuestionTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/hotQuestionComponent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/hotQuestionInterest"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="" />
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_gravity="center"
-            android:background="#00ffffff"
-            android:src="@drawable/comment"
-            android:scaleType="fitXY"
-            android:layout_width="15dp"
-            android:layout_height="15dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/raise_hand" />
 
-        <TextView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@color/colorWhite"
-            android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="#dd1111"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/hotQuestionId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="id"
+                android:textSize="20sp" />
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:background="#00ffffff"
-            android:scaleType="fitXY"
-            android:src="@drawable/like" />
+            <TextView
+                android:id="@+id/hotQuestionTime"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="시간"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
 
         <TextView
-            android:layout_width="15sp"
-            android:layout_height="15sp"
-            android:background="@color/colorWhite"
-            android:text="0"
-            android:textSize="10sp"
-            android:textColor="#062ff9"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/raise_hand" />
-
-        <TextView
-            android:id="@+id/hotQuestionId1"
+            android:id="@+id/hotQuestionTitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="id"
-            android:textSize="20sp" />
+            android:layout_height="wrap_content"
+            android:text="title" />
 
         <TextView
-            android:id="@+id/hotQuestionTime1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="시간"
-            android:textSize="10sp"/>
+            android:id="@+id/hotQuestionComponent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hotQuestionInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Classify" />
+
+            <ImageView
+                android:layout_gravity="center"
+                android:background="#00ffffff"
+                android:src="@drawable/comment"
+                android:scaleType="fitXY"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@color/colorWhite"
+                android:text="0"
+                android:textSize="10sp"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="#dd1111"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#00ffffff"
+                android:scaleType="fitXY"
+                android:src="@drawable/like" />
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@color/colorWhite"
+                android:text="0"
+                android:textSize="10sp"
+                android:textColor="#062ff9"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/hotQuestionTitle1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/hotQuestionComponent1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
 
     <LinearLayout
+        android:id="@+id/hotQ2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/hotQuestionInterest1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="" />
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_gravity="center"
-            android:background="#00ffffff"
-            android:src="@drawable/comment"
-            android:scaleType="fitXY"
-            android:layout_width="15dp"
-            android:layout_height="15dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/raise_hand" />
 
-        <TextView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@color/colorWhite"
-            android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="#dd1111"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/hotQuestionId1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="id"
+                android:textSize="20sp" />
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:background="#00ffffff"
-            android:scaleType="fitXY"
-            android:src="@drawable/like" />
+            <TextView
+                android:id="@+id/hotQuestionTime1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="시간"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
 
         <TextView
-            android:layout_width="15sp"
-            android:layout_height="15sp"
-            android:background="@color/colorWhite"
-            android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="#062ff9"
-            android:layout_gravity="center"/>
+            android:id="@+id/hotQuestionTitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="title" />
+
+        <TextView
+            android:id="@+id/hotQuestionComponent1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hotQuestionInterest1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Classify" />
+
+            <ImageView
+                android:layout_gravity="center"
+                android:background="#00ffffff"
+                android:src="@drawable/comment"
+                android:scaleType="fitXY"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@color/colorWhite"
+                android:text="0"
+                android:textSize="10sp"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="#dd1111"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#00ffffff"
+                android:scaleType="fitXY"
+                android:src="@drawable/like" />
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@color/colorWhite"
+                android:text="0"
+                android:textSize="10sp"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="#062ff9"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

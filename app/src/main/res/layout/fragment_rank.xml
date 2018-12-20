@@ -14,103 +14,12 @@
         android:background="@color/colorWhite"
         android:src="@drawable/ranking" />
 
-
-    <ScrollView
-        android:id="@+id/rankScroll"
+    <ListView
+        android:id="@+id/rankListView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#ff000000">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
-        <LinearLayout
-            android:id="@+id/rankLay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include
-                android:id="@+id/rankP1"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP2"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP3"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP4"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP5"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP6"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP7"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP8"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP9"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-            <include
-                android:id="@+id/rankP10"
-                layout="@layout/rank_component"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginVertical="1dp" />
-
-        </LinearLayout>
-
-    </ScrollView>
 
     <TextView
         android:text="MY_RANK"

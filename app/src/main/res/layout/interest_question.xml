@@ -31,191 +31,208 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/interestQ1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/raise_hand" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/raise_hand" />
+
+            <TextView
+                android:id="@+id/interQuestionId"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="id"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/interQuestionTime"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="시간"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/interQuestionId"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="id"
-            android:textSize="20sp" />
+            android:id="@+id/interQuestionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="title" />
 
         <TextView
-            android:id="@+id/interQuestionTime"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="시간"
-            android:textSize="10sp"/>
+            android:id="@+id/interQuestionComponent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/interQuestionInter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Classify" />
+
+            <ImageView
+                android:layout_gravity="center"
+                android:background="#00ffffff"
+                android:src="@drawable/comment"
+                android:scaleType="fitXY"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@color/colorWhite"
+                android:text="0"
+                android:textSize="10sp"
+                android:textColor="#dd1111"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#00ffffff"
+                android:scaleType="fitXY"
+                android:src="@drawable/like" />
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@color/colorWhite"
+                android:text="0"
+                android:textSize="10sp"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="#062ff9"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/interQuestionTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/interQuestionComponent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
-
     <LinearLayout
+        android:id="@+id/interestQ2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/interQuestionInter"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="" />
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
 
-        <ImageView
-            android:layout_gravity="center"
-            android:background="#00ffffff"
-            android:src="@drawable/comment"
-            android:scaleType="fitXY"
-            android:layout_width="15dp"
-            android:layout_height="15dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/raise_hand" />
 
-        <TextView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@color/colorWhite"
-            android:text="0"
-            android:textSize="10sp"
-            android:textColor="#dd1111"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/interQuestionId1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="id"
+                android:textSize="20sp"/>
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:background="#00ffffff"
-            android:scaleType="fitXY"
-            android:src="@drawable/like" />
+            <TextView
+                android:id="@+id/interQuestionTime1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="시간"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="15sp"
-            android:layout_height="15sp"
-            android:background="@color/colorWhite"
-            android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="#062ff9"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
+            android:id="@+id/interQuestionTitle1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/raise_hand" />
+            android:text="title" />
 
         <TextView
-            android:id="@+id/interQuestionId1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="id"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/interQuestionTime1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="시간"
-            android:textSize="10sp"/>
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/interQuestionTitle1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/interQuestionComponent1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/interQuestionInter1"
-            android:layout_width="wrap_content"
+            android:id="@+id/interQuestionComponent1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="" />
+            android:text="txt" />
 
-        <ImageView
-            android:layout_gravity="center"
-            android:background="#00ffffff"
-            android:src="@drawable/comment"
-            android:scaleType="fitXY"
-            android:layout_width="15dp"
-            android:layout_height="15dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@color/colorWhite"
-            android:text="0"
-            android:textSize="10sp"
-            android:textColor="#dd1111"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/interQuestionInter1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Classify" />
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:background="#00ffffff"
-            android:scaleType="fitXY"
-            android:src="@drawable/like" />
+            <ImageView
+                android:layout_gravity="center"
+                android:background="#00ffffff"
+                android:src="@drawable/comment"
+                android:scaleType="fitXY"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
 
-        <TextView
-            android:layout_width="15sp"
-            android:layout_height="15sp"
-            android:background="@color/colorWhite"
-            android:text="0"
-            android:textSize="10sp"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="#062ff9"
-            android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@color/colorWhite"
+                android:text="0"
+                android:textSize="10sp"
+                android:textColor="#dd1111"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#00ffffff"
+                android:scaleType="fitXY"
+                android:src="@drawable/like" />
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@color/colorWhite"
+                android:text="0"
+                android:textSize="10sp"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="#062ff9"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
