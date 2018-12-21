@@ -56,6 +56,7 @@
 			JArray = mDB.selectQuery(column, table, cond);
 			JObject.put("response", JArray);
 			out.println(JObject);
+			System.out.println(JObject);
 		}
 		else if(((JSONObject)test.get(0)).get("Type").equals("DELETE"))
 		{
@@ -67,6 +68,7 @@
 			}
 			JObject.put("response", String.valueOf(mDB.deleteQuery(table, cond)));
 			out.println(JObject);
+			System.out.println(JObject);
 		}
 		else if(((JSONObject)test.get(0)).get("Type").equals("INSERT"))
 		{
@@ -83,6 +85,7 @@
 			}
 			JObject.put("response", String.valueOf(mDB.insertQuery(column, table, value)));
 			out.println(JObject);
+			System.out.println(JObject);
 		}
 		else if(((JSONObject)test.get(0)).get("Type").equals("UPDATE"))
 		{
@@ -99,12 +102,25 @@
 			}
 			JObject.put("response", String.valueOf(mDB.updateQuery(value, table, cond)));
 			out.println(JObject);
+			System.out.println(JObject);
 		}
 		else if(((JSONObject)test.get(0)).get("Type").equals("CUSTOM"))
 		{
 			JArray = mDB.customQuery((((JSONObject)test.get(0)).get("Query")).toString());
 			JObject.put("response", JArray);
 			out.println(JObject);
+			System.out.println(JObject);
+		}
+		else if(((JSONObject)test.get(0)).get("Type").equals("LOGIN")){
+			if(((JSONObject)test.get(0)).containsKey("Cond"))
+			{
+				for(int i=0; i<((JSONArray)((JSONObject)test.get(0)).get("Cond")).size(); i++)
+					cond.add((((JSONArray)((JSONObject)test.get(0)).get("Cond")).get(i)).toString());
+			}
+	
+			JObject = mDB.loginQuery(cond);
+			out.println(JObject);
+			System.out.println(JObject);
 		}
 	}
 %>

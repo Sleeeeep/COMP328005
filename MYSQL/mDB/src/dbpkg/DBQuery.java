@@ -5,7 +5,7 @@ import java.util.*;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
-public class DBQuery { 	
+public class DBQuery {
 	private static DBQuery mDB = new DBQuery();
 
 	public DBQuery() {
@@ -40,7 +40,7 @@ public class DBQuery {
 
 	public JSONArray selectQuery(ArrayList<String> column, String table, ArrayList<String> cond) {
 		JSONArray jArray = new JSONArray();
-		
+
 		if (table == null) {
 			System.err.println("select : no table");
 			return jArray;
@@ -76,10 +76,10 @@ public class DBQuery {
 			rs = pstmt.executeQuery();
 			rsmd = rs.getMetaData();
 			int colNum = rsmd.getColumnCount();
-			
+
 			while (rs.next()) {
 				JSONObject jObject = new JSONObject();
-				
+
 				for (int i = 1; i <= colNum; i++) {
 					jObject.put(rsmd.getColumnName(i), rs.getString(i));
 				}
@@ -88,8 +88,51 @@ public class DBQuery {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return jArray;
+	}
+
+	public JSONObject loginQuery(ArrayList<String> cond) {
+		JSONObject jObject = new JSONObject();
+
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT Id FROM mUSER");
+
+		if (cond.size() == 2) {
+			query.append(" WHERE ");
+			for (int i = 0; i < cond.size(); i++) {
+				if (i != cond.size() - 1)
+					query.append(cond.get(i) + " AND ");
+				else
+					query.append(cond.get(i));
+			}
+
+			try {
+				pstmt = conn.prepareStatement(query.toString());
+				rs = pstmt.executeQuery();
+				rsmd = rs.getMetaData();
+				rs.last();
+				int cnt = rs.getRow();
+				
+				if (cnt == 0) {
+					jObject.put("response", "Fail");
+				} else if(cnt == 1) {
+					rs.first();
+					String id = rs.getString(1);
+					System.out.println(id);
+					
+					jObject.put("response", id);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				jObject.put("response", "Fail");
+			}
+		} else {
+			jObject.put("response", "Fail");
+		}
+		System.out.println(query);
+
+		return jObject;
 	}
 
 	public JSONArray customQuery(String query) {
@@ -100,10 +143,10 @@ public class DBQuery {
 			rs = pstmt.executeQuery();
 			rsmd = rs.getMetaData();
 			int colNum = rsmd.getColumnCount();
-			
+
 			while (rs.next()) {
 				JSONObject jObject = new JSONObject();
-				
+
 				for (int i = 1; i <= colNum; i++) {
 					jObject.put(rsmd.getColumnName(i), rs.getString(i));
 				}
@@ -112,10 +155,10 @@ public class DBQuery {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return jArray;
 	}
-	
+
 	public int insertQuery(ArrayList<String> column, String table, ArrayList<String> value) {
 		int result = 0;
 
@@ -191,7 +234,7 @@ public class DBQuery {
 			e.printStackTrace();
 			return -2;
 		}
-		return result;	
+		return result;
 	}
 
 	public int updateQuery(ArrayList<String> value, String table, ArrayList<String> cond) {
@@ -216,7 +259,7 @@ public class DBQuery {
 			else
 				query.append(value.get(i) + ", ");
 		}
-		
+
 		if (cond.size() != 0) {
 			query.append(" WHERE ");
 			for (int i = 0; i < cond.size(); i++) {
