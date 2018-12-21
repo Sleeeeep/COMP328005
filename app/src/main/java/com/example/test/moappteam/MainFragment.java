@@ -3,15 +3,12 @@ package com.example.test.moappteam;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 
 /**
@@ -44,7 +41,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(),SignUPActivity.class);
+                Intent intent = new Intent(getActivity(),WriteActivity.class);
                 startActivity(intent);
 
             }

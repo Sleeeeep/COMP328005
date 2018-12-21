@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".SignUPActivity" />
         <activity android:name=".SpeakViewActivity" />
-        <activity android:name=".LogInActivity"></activity>
+        <activity android:name=".LogInActivity" />
+        <activity android:name=".WriteActivity"></activity>
     </application>
 
 </manifest>
