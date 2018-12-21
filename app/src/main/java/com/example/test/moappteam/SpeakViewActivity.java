@@ -1,8 +1,10 @@
 package com.example.test.moappteam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class SpeakViewActivity extends AppCompatActivity {

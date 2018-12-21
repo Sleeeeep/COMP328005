@@ -7,6 +7,47 @@
     android:background="#FFF"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카테고리: "
+            android:layout_marginLeft="5dp"/>
+
+        <Spinner
+            android:id="@+id/speakFavorSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.8"
+            android:textColor="@color/colorWhite" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="#00ffffff"
+            android:src="@drawable/write"
+            android:scaleType="fitXY"
+            android:id="@+id/writeButton"
+            android:layout_marginRight="5dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000"/>
+
     <ListView
         android:id="@+id/speakListView"
         android:layout_width="match_parent"
