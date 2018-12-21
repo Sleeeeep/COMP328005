@@ -1,13 +1,13 @@
 package com.example.test.moappteam;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private SpeakFragment speakFragment;
     private RankFragment rankFragment;
     private Toolbar toolbar;
+
 
     private long backPressedTime = 0;
     private final long FINISH_INTERVAL_TIME = 2000;
@@ -112,4 +113,5 @@ public class MainActivity extends AppCompatActivity {
                 return false;
         }
     }
+
 }

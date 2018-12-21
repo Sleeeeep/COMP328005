@@ -175,7 +175,7 @@ public class SignUPActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                mDB = new DBClass("http://155.230.84.186:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
@@ -208,6 +208,10 @@ public class SignUPActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("RESULT",s);
+
+            if(s.equals("1")){
+                Toast.makeText(SignUPActivity.this,"회원가입에 성공했습니다",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

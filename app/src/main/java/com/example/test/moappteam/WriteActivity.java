@@ -49,11 +49,13 @@ public class WriteActivity extends AppCompatActivity {
             }
         });
 
+        //완료 버튼 클릭시 서버연동 작업 수행
         confirmBtn = (ImageButton)findViewById(R.id.confirmBtn);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startWite();
+                //finish();
             }
         });
 
@@ -91,6 +93,7 @@ public class WriteActivity extends AppCompatActivity {
 
         wTitle = (EditText)findViewById(R.id.writeTitle);
         wTxt = (EditText)findViewById(R.id.inputTxt);
+        Log.i("스피너 값",spinner.getSelectedItem().toString());
 
 
     }
