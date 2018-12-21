@@ -14,24 +14,24 @@
         android:src="@drawable/myface"/>
 
     <TextView
+        android:id="@+id/myPage_userName"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="정보경" />
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/myPage_userDept"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="컴퓨터학부"/>
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_marginTop="100dp"
@@ -56,13 +56,13 @@
                 android:text="순위" />
 
             <TextView
+                android:id="@+id/myPage_userRank"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="1위"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,16 +80,16 @@
                 android:textColor="#000000"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:text="댓글"/>
+                android:text="질문수"/>
 
             <TextView
+                android:id="@+id/myPage_userAsk"
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:textColor="#000000"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="1개"/>
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -109,13 +109,13 @@
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/myPage_userComment"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="2개"/>
+                android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

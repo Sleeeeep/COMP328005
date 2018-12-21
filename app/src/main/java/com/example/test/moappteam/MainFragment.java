@@ -2,7 +2,6 @@ package com.example.test.moappteam;
 
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,15 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.test.moappteam.DBpkg.DBClass;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.net.HttpURLConnection;
-import java.util.Iterator;
 
 
 /**
@@ -57,7 +49,7 @@ public class MainFragment extends Fragment {
 
         setListener();
 
-        connectDb();
+        Toast.makeText(getActivity(),"로그인이 필요합니다",Toast.LENGTH_LONG).show();
 
         setView();
 
@@ -65,10 +57,11 @@ public class MainFragment extends Fragment {
 
     }
 
-    public void connectDb(){
+    @Override
+    public void onPause() {
+        super.onPause();
 
-
-
+        setView();
 
     }
 
@@ -125,66 +118,57 @@ public class MainFragment extends Fragment {
 
     public void setView(){
         //화면을 구성하는 정보를 설정하는 함수
-        try{
 
-            JSONObject object = new JSONObject(result);
+        TextView interId1 =  (TextView) interest1.findViewById(R.id.interQuestionId);
+        TextView interId2 =  (TextView) interest1.findViewById(R.id.interQuestionId1);
 
-        }catch (Exception e){
+        TextView interTime1 =  (TextView) interest1.findViewById(R.id.interQuestionTime);
+        TextView interTime2 =  (TextView) interest1.findViewById(R.id.interQuestionTime1);
 
-        }
-    }
+        TextView interTitle1 =  (TextView) interest1.findViewById(R.id.interQuestionTitle);
+        TextView interTitle2 =  (TextView) interest1.findViewById(R.id.interQuestionTitle1);
+
+        TextView interTxt1 =  (TextView) interest1.findViewById(R.id.interQuestionComponent);
+        TextView interTxt2 =  (TextView) interest1.findViewById(R.id.interQuestionComponent1);
+
+        TextView interCla1 =  (TextView) interest1.findViewById(R.id.interQuestionInter);
+        TextView interCla2 =  (TextView) interest1.findViewById(R.id.interQuestionInter1);
+
+        TextView hotId1 =  (TextView) interest1.findViewById(R.id.hotQuestionId);
+        TextView hotId2 =  (TextView) interest1.findViewById(R.id.hotQuestionId1);
+
+        TextView hotTime1 =  (TextView) interest1.findViewById(R.id.hotQuestionTime);
+        TextView hotTime2 =  (TextView) interest1.findViewById(R.id.hotQuestionTime1);
+
+        TextView hotTitle1 =  (TextView) interest1.findViewById(R.id.hotQuestionTitle);
+        TextView hotTitle2 =  (TextView) interest1.findViewById(R.id.hotQuestionTitle1);
+
+        TextView hotTxt1 =  (TextView) interest1.findViewById(R.id.hotQuestionComponent);
+        TextView hotTxt2 =  (TextView) interest1.findViewById(R.id.hotQuestionComponent1);
+
+        TextView hotCla1 =  (TextView) interest1.findViewById(R.id.hotQuestionInterest);
+        TextView hotCla2 =  (TextView) interest1.findViewById(R.id.hotQuestionInterest1);
+
+        TextView newId1 =  (TextView) interest1.findViewById(R.id.newQuestionId);
+        TextView newId2 =  (TextView) interest1.findViewById(R.id.newQuestionId1);
+
+        TextView newTime1 =  (TextView) interest1.findViewById(R.id.newQuestionTime);
+        TextView newTime2 =  (TextView) interest1.findViewById(R.id.newQuestionTime1);
+
+        TextView newTitle1 =  (TextView) interest1.findViewById(R.id.newQuestionTitle);
+        TextView newTitle2 =  (TextView) interest1.findViewById(R.id.newQuestionTitle1);
+
+        TextView newTxt1 =  (TextView) interest1.findViewById(R.id.newQuestionComponent);
+        TextView newTxt2 =  (TextView) interest1.findViewById(R.id.newQuestionComponent1);
+
+        TextView newCla1 =  (TextView) interest1.findViewById(R.id.newQuestionInterest);
+        TextView newCla2 =  (TextView) interest1.findViewById(R.id.newQuestionInterest1);
+
+        Log.i("SetView","SetView");
+        
 
 
-    class MainFCustomTask extends AsyncTask<String, Void, String> {
 
-        JSONObject json = null;
-        String data = "";
-
-        DBClass mDB;
-
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
-                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
-                mDB.setURL();
-
-                if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
-                    Log.i("DB", "url connection error");
-                else {
-                    if (strings[0].contains("SELECT") || strings[0].contains("CUSTOM")) {
-                        json = mDB.getData();
-
-                        JSONArray jArr = json.getJSONArray("response");
-
-                        for (int i = 0; i < jArr.length(); i++) {
-                            data += "\n";
-                            json = jArr.getJSONObject(i);
-                            Iterator<?> iter = json.keys();
-                            while (iter.hasNext()) {
-                                String temp = iter.next().toString();
-                                data += temp + " " + json.getString(temp) + "\n";
-                            }
-                        }
-                    } else
-                        data = mDB.getData().getString("response");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return data;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.i("RESULT",s);
-
-            if(s.equals("1")){
-                Toast.makeText(getActivity(),"회원가입에 성공했습니다",Toast.LENGTH_SHORT).show();
-                result = s;
-                setView();
-            }
-        }
     }
 
 
