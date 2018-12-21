@@ -3,6 +3,7 @@ package com.example.test.moappteam;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,6 @@ public class LogInActivity extends AppCompatActivity {
     Button signBtn;
     EditText inputId;
     EditText inputPw;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,6 @@ public class LogInActivity extends AppCompatActivity {
         if(!inputId.getText().toString().equals("") && !inputPw.getText().toString().equals("")){
 
             try{
-
 
                 JSONObject obj = new JSONObject();
                 JSONArray arr = new JSONArray();
@@ -84,7 +83,6 @@ public class LogInActivity extends AppCompatActivity {
             Toast.makeText(LogInActivity.this,"아이디와 비밀번호를 확인해 주세요",Toast.LENGTH_SHORT).show();
         }
 
-
     }
 
 
@@ -98,7 +96,7 @@ public class LogInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass("http://jaewoon.iptime.org:8080/mDB/JsonTest.jsp?");
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
@@ -140,7 +138,7 @@ public class LogInActivity extends AppCompatActivity {
 
                 Log.i("sUserId",StaticVariables.sLoginid);
 
-                finish();
+                connectDb();
 
             }else {
 
@@ -150,10 +148,94 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
+    class MainFCustomTask extends AsyncTask<String, Void, String> {
 
+        JSONObject json = null;
+        String data = "";
 
+        DBClass mDB;
 
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                mDB = new DBClass("http://jaewoon.iptime.org:8080/mDB/JsonTest.jsp?");
+                mDB.setURL();
 
+                if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
+                    Log.i("DB", "url connection error");
+                else {
+                    if (strings[0].contains("SELECT") || strings[0].contains("CUSTOM")) {
+                        json = mDB.getData();
 
+                        JSONArray jArr = json.getJSONArray("response");
+
+                        for (int i = 0; i < jArr.length(); i++) {
+                            //Log.i("mainResult",jArr.toString());
+                            data += jArr.toString();
+                        }
+                    } else
+                        data = mDB.getData().getString("response");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            StaticVariables.mainResult = s;
+
+            Log.i("mainResult",StaticVariables.mainResult);
+
+            try {
+
+                Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+
+                startActivity(intent);
+
+                finish();
+
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+    public void connectDb(){
+
+        if(StaticVariables.sLoginid==null){
+
+        }else{
+
+            try {
+
+                JSONObject obj = new JSONObject();
+                JSONArray arr = new JSONArray();
+
+                obj.put("Type", "CUSTOM");
+
+                obj.put("Query", "SELECT Uid, Qnumber, Title, Good, Cname, Qtime " +
+                        "FROM Favor_Qlist WHERE Id='" + StaticVariables.sLoginid + "'");
+
+                arr = new JSONArray();
+                arr.put(obj);
+
+                obj = new JSONObject();
+                obj.put("query", arr);
+
+                MainFCustomTask mainTest = new MainFCustomTask();
+
+                mainTest.execute(obj.toString());
+
+                Log.e("RESULT", obj.toString());
+
+            } catch (Exception e) {
+
+            }
+        }
+    }
 
 }

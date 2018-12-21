@@ -98,20 +98,11 @@ public class MainFragment extends Fragment {
 
         setListener();
 
-        if(StaticVariables.sLoginid==null){
-
-            Toast.makeText(getActivity(),"로그인이 필요합니다",Toast.LENGTH_LONG).show();
-
-        }
-
         setView();
-
-        connectDb();
 
         return view;
 
     }
-
 
     public void setListener(){
 
@@ -203,112 +194,45 @@ public class MainFragment extends Fragment {
         newCla1 =  (TextView) interest1.findViewById(R.id.newQuestionInterest);
         newCla2 =  (TextView) interest1.findViewById(R.id.newQuestionInterest1);
 
-        //interId1.setText("");
+        //메인프레그먼트 세팅
 
-    }
+        Log.i("MainFResult",StaticVariables.mainResult);
 
+        try{
 
-    class MainFCustomTask extends AsyncTask<String, Void, String> {
+            JSONArray jArr = new JSONArray(StaticVariables.mainResult);
 
-        JSONObject json = null;
-        String data = "";
+            interId1.setText(""+jArr.getJSONObject(0).toString());
+            interId2.setText(""+jArr.getJSONObject(1).getString("Uid"));
+            interTime1.setText(""+jArr.getJSONObject(0).getString("Qtime"));
+            interTime2.setText(""+jArr.getJSONObject(1).getString("Qtime"));
+            interTitle1.setText(""+jArr.getJSONObject(0).getString("Title"));
+            interTitle2.setText(""+jArr.getJSONObject(1).getString("Title"));
+            interCla1.setText(""+jArr.getJSONObject(0).getString("Cname"));
+            interCla2.setText(""+jArr.getJSONObject(1).getString("Cname"));
 
-        DBClass mDB;
+            hotId1.setText(""+jArr.getJSONObject(2).getString("Uid"));
+            hotId2.setText(""+jArr.getJSONObject(3).getString("Uid"));
+            hotTime1.setText(""+jArr.getJSONObject(2).getString("Qtime"));
+            hotTime2.setText(""+jArr.getJSONObject(3).getString("Qtime"));
+            hotTitle1.setText(""+jArr.getJSONObject(2).getString("Title"));
+            hotTitle2.setText(""+jArr.getJSONObject(3).getString("Title"));
+            hotCla1.setText(""+jArr.getJSONObject(2).getString("Cname"));
+            hotCla2.setText(""+jArr.getJSONObject(3).getString("Cname"));
 
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
-                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
-                mDB.setURL();
+            newId1.setText(""+jArr.getJSONObject(4).getString("Uid"));
+            newId2.setText(""+jArr.getJSONObject(5).getString("Uid"));
+            newTime1.setText(""+jArr.getJSONObject(4).getString("Qtime"));
+            newTime2.setText(""+jArr.getJSONObject(5).getString("Qtime"));
+            newTitle1.setText(""+jArr.getJSONObject(4).getString("Title"));
+            newTitle2.setText(""+jArr.getJSONObject(5).getString("Title"));
+            newCla1.setText(""+jArr.getJSONObject(4).getString("Cname"));
+            newCla2.setText(""+jArr.getJSONObject(5).getString("Cname"));
 
-                if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
-                    Log.i("DB", "url connection error");
-                else {
-                    if (strings[0].contains("SELECT") || strings[0].contains("CUSTOM")) {
-                        json = mDB.getData();
-
-                        JSONArray jArr = json.getJSONArray("response");
-
-                        for (int i = 0; i < jArr.length(); i++) {
-                            Log.i("mainResult",jArr.toString());
-                            data += jArr.toString();
-                        }
-                    } else
-                        data = mDB.getData().getString("response");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return data;
+        }catch (Exception e){
+            Log.e("setView Error","setView Error");
         }
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            Flag = false;
-
-            StaticVariables.mainResult = s;
-
-            Log.i("mainResult",StaticVariables.mainResult);
-
-            try {
-
-                JSONArray jArr = new JSONArray(StaticVariables.mainResult);
-
-                interId1.setText(""+ jArr.getJSONObject(1).getString("Qtime"));
-                jArr.getJSONObject(1).getString("Title");
-                jArr.getJSONObject(1).getString("Good");
-
-            } catch (Exception e) {
-
-            }
-
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.detach(frag).attach(frag).commit();
-
-        }
     }
-
-    public void connectDb(){
-
-        if(StaticVariables.sLoginid==null){
-
-        }else{
-
-            if(Flag) {
-
-                try {
-
-                    JSONObject obj = new JSONObject();
-                    JSONArray arr = new JSONArray();
-
-                    obj.put("Type", "CUSTOM");
-
-                    obj.put("Query", "SELECT Uid, Qnumber, Title, Good, Cname, Qtime " +
-                            "FROM Favor_Qlist WHERE Id='" + StaticVariables.sLoginid + "'");
-
-                    arr = new JSONArray();
-                    arr.put(obj);
-
-                    obj = new JSONObject();
-                    obj.put("query", arr);
-
-                    MainFCustomTask mainTest = new MainFCustomTask();
-
-                    mainTest.execute(obj.toString());
-
-                    Log.e("RESULT", obj.toString());
-
-
-                } catch (Exception e) {
-
-                }
-
-                Flag = true;
-            }
-        }
-    }
-
 
 }

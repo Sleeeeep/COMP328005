@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.login,menu);
         return true;
@@ -111,6 +111,6 @@ public class MainActivity extends AppCompatActivity {
             default :
                 return false;
         }
-    }
+    }*/
 
 }
