@@ -2,9 +2,11 @@ package com.example.test.moappteam;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +16,29 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.test.moappteam.DBpkg.DBClass;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SpeakFragment extends Fragment {
+    private ArrayList<Integer> speakNum = new ArrayList<>();
+    private ListView speakListView;
+    private SpeakListViewAdapter adapter = new SpeakListViewAdapter();
+    private Spinner catSpinner;
+    private Fragment frag = this;
+    private boolean flag = true;
 
     public SpeakFragment() {
         // Required empty public constructor
@@ -30,10 +49,9 @@ public class SpeakFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_speak, container, false);
-        ListView speakListView = view.findViewById(R.id.speakListView);
-        SpeakListViewAdapter adapter = new SpeakListViewAdapter();
+        speakListView = view.findViewById(R.id.speakListView);
         speakListView.setAdapter(adapter);
-        Spinner catSpinner = view.findViewById(R.id.speakFavorSpinner);
+        catSpinner = view.findViewById(R.id.speakFavorSpinner);
         String[] interest = getResources().getStringArray(R.array.favor);
 
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(
@@ -68,22 +86,93 @@ public class SpeakFragment extends Fragment {
             }
         });
 
+        if(flag) {
+            try {
 
+                JSONObject obj = new JSONObject();
+                JSONArray arr = new JSONArray();
+
+                obj.put("Type", "CUSTOM");
+                obj.put("Query", "SELECT * FROM Qlist");
+
+                arr.put(obj);
+
+                obj = new JSONObject();
+                obj.put("query", arr);
+
+                SpeakFragment.CustomTask viewTextList = new SpeakFragment.CustomTask();
+                viewTextList.execute(obj.toString());
+                Log.e("RESULT", obj.toString());
+
+
+            } catch (JSONException e) {
+                Log.i("게시판리스트 json", e.getStackTrace().toString());
+            }
+            flag = true;
+        }
 
         // example
-        adapter.addItem("title", "user", "12:00:00", "일반", 1, 1);
-        adapter.addItem("title2", "user2", "12:00:56", "특수", 0, 3);
+        //adapter.addItem("title", "user", "12:00:00", "일반", 1, 1);
+        //adapter.addItem("title2", "user2", "12:00:56", "특수", 0, 3);
 
         speakListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                JSONObject mainText = new JSONObject();
                 ListView listView = (ListView) parent;
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
+                intent.putExtra("MAIN_TEXT", mainText.toString());
                 startActivity(intent);
                 String item = (String) listView.getItemAtPosition(position);
             }
         });
 
         return view;
+    }
+
+    class CustomTask extends AsyncTask<String, Void, JSONArray> {
+
+        JSONObject json = null;
+
+        DBClass mDB;
+
+        @Override
+        protected JSONArray doInBackground(String... strings) {
+            JSONArray jArr = new JSONArray();
+            try {
+                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
+                mDB.setURL();
+
+                if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
+                    Log.i("DB", "url connection error");
+                else {
+                    if (strings[0].contains("SELECT") || strings[0].contains("CUSTOM")) {
+                        json = mDB.getData();
+
+                        jArr = json.getJSONArray("response");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return jArr;
+        }
+
+        @Override
+        protected void onPostExecute(JSONArray arr) {
+            Log.i("RESULT", arr.toString());
+            super.onPostExecute(arr);
+            for(int i = arr.length() - 1; i >= 0; i--) {
+                try {
+                    adapter.addItem(arr.getJSONObject(i));
+                } catch (Exception e) {
+                    Log.e("Error", "erer");
+                }
+            }
+            adapter.notifyDataSetChanged();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(frag).attach(frag).commit();
+            flag = false;
+        }
     }
 }
