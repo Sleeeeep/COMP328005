@@ -49,42 +49,41 @@ public class LogInActivity extends AppCompatActivity {
     public void doLogin(View view){
 
         //로그인 시도
-        inputId.getText().toString();
-        inputPw.getText().toString();
 
-        try{
+        if(!inputId.getText().toString().equals("") && !inputPw.getText().toString().equals("")){
 
-            JSONObject signUpInfo = new JSONObject();
-            signUpInfo.put("id", inputId.getText().toString());
-            signUpInfo.put("password", inputPw.getText().toString());
-
-            JSONObject obj = new JSONObject();
-            JSONArray arr = new JSONArray();
-
-            obj.put("Type", "INSERT");
-            obj.put("Table", "mUSER");
-            arr.put("Id");
-            arr.put("Pw");
-            obj.put("Col", arr);
-            arr = new JSONArray();
-            arr.put("'"+inputId.getText().toString()+"'");
-            arr.put("'"+inputPw.getText().toString()+"'");
-            obj.put("Value", arr);
-
-            arr = new JSONArray();
-            arr.put(obj);
-
-            obj = new JSONObject();
-            obj.put("query", arr);
+            try{
 
 
-            LoginCustomTask loginTest = new LoginCustomTask();
-            loginTest.execute(obj.toString());
+                JSONObject obj = new JSONObject();
+                JSONArray arr = new JSONArray();
 
-        }catch (JSONException e){
+                obj.put("Type", "LOGIN");
+                arr.put("Id='"+inputId.getText().toString()+"'");
+                arr.put("Pw='"+inputPw.getText().toString()+"'");
+                obj.put("Cond", arr);
 
-            Log.e("로그인 json",e.getStackTrace().toString());
+                arr = new JSONArray();
+                arr.put(obj);
+
+                obj = new JSONObject();
+                obj.put("query", arr);
+
+                LoginCustomTask loginTest = new LoginCustomTask();
+                loginTest.execute(obj.toString());
+                Log.e("RESULT",obj.toString());
+
+
+            }catch (JSONException e){
+
+                Log.i("로그인 json",e.getStackTrace().toString());
+            }
+
+        }else {
+
+            Toast.makeText(LogInActivity.this,"아이디와 비밀번호를 확인해 주세요",Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
@@ -133,9 +132,18 @@ public class LogInActivity extends AppCompatActivity {
             super.onPostExecute(s);
             Log.i("RESULT",s);
 
-            if(s.equals("1")){
-                Toast.makeText(LogInActivity.this,"회원가입에 성공했습니다",Toast.LENGTH_SHORT).show();
+            if(s.equals(inputId.getText().toString())){
+
+                Toast.makeText(LogInActivity.this,"로그인에 성공했습니다",Toast.LENGTH_SHORT).show();
+
+                finish();
+
+            }else {
+
+                Toast.makeText(LogInActivity.this,"로그인에 실패했습니다",Toast.LENGTH_SHORT).show();
+
             }
+
         }
     }
 

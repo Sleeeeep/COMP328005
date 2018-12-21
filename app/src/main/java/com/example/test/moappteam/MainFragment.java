@@ -33,6 +33,8 @@ public class MainFragment extends Fragment {
     LinearLayout new1;
     LinearLayout new2;
 
+    String result;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -55,8 +57,18 @@ public class MainFragment extends Fragment {
 
         setListener();
 
+        connectDb();
+
+        setView();
 
         return view;
+
+    }
+
+    public void connectDb(){
+
+
+
 
     }
 
@@ -113,11 +125,17 @@ public class MainFragment extends Fragment {
 
     public void setView(){
         //화면을 구성하는 정보를 설정하는 함수
+        try{
 
+            JSONObject object = new JSONObject(result);
+
+        }catch (Exception e){
+
+        }
     }
 
 
-    class LoginCustomTask extends AsyncTask<String, Void, String> {
+    class MainFCustomTask extends AsyncTask<String, Void, String> {
 
         JSONObject json = null;
         String data = "";
@@ -163,7 +181,7 @@ public class MainFragment extends Fragment {
 
             if(s.equals("1")){
                 Toast.makeText(getActivity(),"회원가입에 성공했습니다",Toast.LENGTH_SHORT).show();
-
+                result = s;
                 setView();
             }
         }
