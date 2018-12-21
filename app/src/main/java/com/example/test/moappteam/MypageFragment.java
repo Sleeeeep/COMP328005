@@ -3,7 +3,9 @@ package com.example.test.moappteam;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,44 +42,54 @@ public class MypageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_mypage, container, false);
 
-        userName = view.findViewById(R.id.myPage_userName);
-        userDept = view.findViewById(R.id.myPage_userDept);
-        userRank = view.findViewById(R.id.myPage_userRank);
-        userAsk = view.findViewById(R.id.myPage_userAsk);
-        userComment = view.findViewById(R.id.myPage_userComment);
+        if(StaticVariables.sLoginid != null) {
 
-        try{
-            MypageCustomTask task = new MypageCustomTask();
-            JSONArray arr = new JSONArray();
-            JSONObject obj = new JSONObject();
+            View view = inflater.inflate(R.layout.fragment_mypage, container, false);
+            userName = view.findViewById(R.id.myPage_userName);
+            userDept = view.findViewById(R.id.myPage_userDept);
+            userRank = view.findViewById(R.id.myPage_userRank);
+            userAsk = view.findViewById(R.id.myPage_userAsk);
+            userComment = view.findViewById(R.id.myPage_userComment);
 
-            obj.put("Type", "SELECT");
-            obj.put("Table", "Mypage");
-            arr.put("Name");
-        //    arr.put("Dname");
-          //  arr.put("Rank");        // 등수
-            arr.put("Qcnt");      // 질문글 갯수
-            arr.put("Ccnt");      // 댓글 갯수
-            obj.put("Col", arr);
-            arr = new JSONArray();
-            arr.put("Id='test1'");
-            obj.put("Cond", arr);
+            try {
+                MypageCustomTask task = new MypageCustomTask();
+                JSONArray arr = new JSONArray();
+                JSONObject obj = new JSONObject();
 
-            arr = new JSONArray();
-            arr.put(obj);
+                obj.put("Type", "SELECT");
+                obj.put("Table", "Mypage");
+                arr.put("Name");
+                //    arr.put("Dname");
+                //  arr.put("Rank");        // 등수
+                arr.put("Qcnt");      // 질문글 갯수
+                arr.put("Ccnt");      // 댓글 갯수
+                obj.put("Col", arr);
+                arr = new JSONArray();
+                arr.put("Id='" + StaticVariables.sLoginid + "'");
+                obj.put("Cond", arr);
 
-            obj = new JSONObject();
-            obj.put("query", arr);
+                arr = new JSONArray();
+                arr.put(obj);
 
-           task.execute(obj.toString());
+                obj = new JSONObject();
+                obj.put("query", arr);
 
-        }catch(JSONException e){
-            Log.i("myPage json", e.getStackTrace().toString());
+                task.execute(obj.toString());
+
+            } catch (JSONException e) {
+                Log.i("myPage json", e.getStackTrace().toString());
+            }
+
+            return view;
+        }
+        else{
+            View view = inflater.inflate(R.layout.fragment_mypage_not_login, container, false);
+            Toast.makeText(getActivity(),"로그인이 필요합니다다다다다다",Toast.LENGTH_LONG).show();
+            return view;
         }
 
-        return view;
+
     }
 
     class MypageCustomTask extends AsyncTask<String, Void, String>
@@ -113,6 +125,7 @@ public class MypageFragment extends Fragment {
                            // strRank = json.getString("Rank") + " 위";
                             strQcnt = json.getString("Qcnt") + " 개";
                             strCcnt = json.getString("Ccnt") + " 개";
+                   //         refresh();
                         }
                     }
                 }
@@ -131,6 +144,13 @@ public class MypageFragment extends Fragment {
           //  userRank.setText(strRank);
             userAsk.setText(strQcnt);
             userComment.setText(strCcnt);
+
         }
+    }
+    private void refresh()
+    {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.detach(this).attach(this).commit();
     }
 }
