@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private RankFragment rankFragment;
     private Toolbar toolbar;
 
-
     private long backPressedTime = 0;
     private final long FINISH_INTERVAL_TIME = 2000;
 

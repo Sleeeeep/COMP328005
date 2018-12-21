@@ -74,12 +74,6 @@
             android:layout_height="wrap_content"
             android:text="title" />
 
-        <TextView
-            android:id="@+id/interQuestionComponent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="text" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -176,12 +170,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="title" />
-
-        <TextView
-            android:id="@+id/interQuestionComponent1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="txt" />
 
         <LinearLayout
             android:layout_width="match_parent"

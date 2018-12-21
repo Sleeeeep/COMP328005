@@ -20,8 +20,6 @@ import org.json.JSONObject;
 import java.net.HttpURLConnection;
 import java.util.Iterator;
 
-import static java.lang.Thread.sleep;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,15 +59,6 @@ public class RankFragment extends Fragment {
 
         connectDb();
 
-        try {
-
-            sleep(1000);
-
-        }catch (Exception e){
-
-        }
-
-
         //for문 사용해서 붙이기
 
         adapter.addItem(1,"user", 1, 1);
@@ -85,7 +74,7 @@ public class RankFragment extends Fragment {
     public void connectDb(){
         //이미 정보가 있는 경우 서버와 연동하지 않음
 
-        if(!StaticVariables.sRankInfo.equals(null)){
+        if(StaticVariables.sRankInfo==null){
 
             try{
 
@@ -159,7 +148,7 @@ public class RankFragment extends Fragment {
             super.onPostExecute(s);
             Log.i("RESULT",s);
 
-            StaticVariables.sRankInfo = s;
+            
 
         }
     }

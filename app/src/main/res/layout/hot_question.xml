@@ -73,12 +73,6 @@
             android:layout_height="wrap_content"
             android:text="title" />
 
-        <TextView
-            android:id="@+id/hotQuestionComponent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="text" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -176,12 +170,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="title" />
-
-        <TextView
-            android:id="@+id/hotQuestionComponent1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="text" />
 
         <LinearLayout
             android:layout_width="match_parent"
