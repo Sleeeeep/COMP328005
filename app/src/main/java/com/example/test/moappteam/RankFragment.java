@@ -33,6 +33,11 @@ public class RankFragment extends Fragment {
     private TextView myComment;
     private TextView myRate;
 
+    private String myRankText;
+    private String myIdText;
+    private String myCommentText;
+    private String myRateText;
+
     JSONObject obj = new JSONObject();
     JSONArray arr = new JSONArray();
 
@@ -63,8 +68,13 @@ public class RankFragment extends Fragment {
 
         if(flag)
             connectDb();
-        else
+        else {
             flag = true;
+            myRank.setText(myRankText + " 등");
+            myId.setText(myIdText);
+            myComment.setText(myCommentText);
+            myRate.setText(myRateText);
+        }
 
         //for문 사용해서 붙이기
 
@@ -83,7 +93,7 @@ public class RankFragment extends Fragment {
         if(StaticVariables.sRankInfo==null){
 
             try{
-                //adapter.resetItem();
+                adapter.resetItem();
                 obj.put("Type", "CUSTOM");
                 obj.put("Query", "SELECT * FROM Ranking");
 
@@ -138,15 +148,34 @@ public class RankFragment extends Fragment {
 
         @Override
         protected void onPostExecute(JSONArray arr) {
+            boolean breakFlag = false;
             super.onPostExecute(arr);
             Log.i("RESULT",arr.toString());
 
-            for(int i = 0; i < arr.length() && i < 10; i++) {
-                try {
-                    adapter.addItem(arr.getJSONObject(i), i + 1);
-                } catch (Exception e) {
-                    Log.e("Error", "어댑터에러");
+            for(int i = 0; i < arr.length(); i++) {
+                if(i < 10) {
+                    try {
+                        adapter.addItem(arr.getJSONObject(i), i + 1);
+                    } catch (Exception e) {
+                        Log.e("Error", "어댑터에러");
+                    }
                 }
+                try {
+                    if (arr.getJSONObject(i).getString("Id").equals(StaticVariables.sLoginid)) {
+                        myRankText = Integer.toString(i + 1);
+                        myIdText = StaticVariables.sLoginid;
+                        myCommentText = arr.getJSONObject(i).getString("Cnt");
+                        if(myCommentText.equals("null"))
+                            myCommentText = "0";
+                        myRateText = arr.getJSONObject(i).getString("Good");
+                        if(myRateText.equals("null"))
+                            myRateText = "0";
+                    }
+                }catch (Exception e) {
+
+                }
+                if(i >= 10 && breakFlag)
+                    break;
             }
             flag = false;
             FragmentTransaction ft = getFragmentManager().beginTransaction();

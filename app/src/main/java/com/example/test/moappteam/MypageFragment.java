@@ -62,7 +62,7 @@ public class MypageFragment extends Fragment {
             arr.put("Ccnt");      // 댓글 갯수
             obj.put("Col", arr);
             arr = new JSONArray();
-            arr.put("Id='test1'");
+            arr.put("Id='" + StaticVariables.sLoginid + "'");
             obj.put("Cond", arr);
 
             arr = new JSONArray();
