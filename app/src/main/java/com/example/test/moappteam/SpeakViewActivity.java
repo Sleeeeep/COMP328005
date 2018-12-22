@@ -36,7 +36,7 @@ public class SpeakViewActivity extends AppCompatActivity {
     private ListView replyListView;
 
     private String Qno = "";
-
+//asd
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

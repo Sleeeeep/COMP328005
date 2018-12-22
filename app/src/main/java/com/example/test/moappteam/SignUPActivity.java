@@ -36,6 +36,9 @@ public class SignUPActivity extends AppCompatActivity {
     EditText sid;
     EditText sName;
 
+    String majorinput = "";
+    String favorinput = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +77,8 @@ public class SignUPActivity extends AppCompatActivity {
                 new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        Log.i("MainActivity.spinner", "pos = " + position + ", id = " + id);
+                        Log.i("MainActivity.spinner", "pos = " + position + ", id = " + id + " ," + parent.getItemAtPosition(position));
+                        favorinput = parent.getItemAtPosition(position).toString();
                     }
 
                     @Override
@@ -97,7 +101,8 @@ public class SignUPActivity extends AppCompatActivity {
                 new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        Log.i("MainActivity.spinner", "pos = " + position + ", id = " + id);
+                        Log.i("MainActivity.spinner", "pos = " + position + ", id = " + id + " ," + parent.getItemAtPosition(position));
+                        majorinput = parent.getItemAtPosition(position).toString();
                     }
 
                     @Override
@@ -153,10 +158,55 @@ public class SignUPActivity extends AppCompatActivity {
 
 
                 CustomTask test = new CustomTask();
-                test.execute(obj.toString());
+                String temp = test.execute(obj.toString()).get();
+                Log.i("testtemp", temp);
+                if(temp.equals("1"))
+                {
+                    Log.i("testtemp", "asd");
+                    obj = new JSONObject();
+                    arr = new JSONArray();
+
+                    obj.put("Type", "CUSTOM");
+                    obj.put("Query", "SELECT Cnumber FROM mCATEGORY WHERE Cname='"+favorinput+"'");
+
+                    arr = new JSONArray();
+                    arr.put(obj);
+
+                    obj = new JSONObject();
+                    obj.put("query", arr);
 
 
-            } catch (JSONException e) {
+                    CustomTask getCno = new CustomTask();
+                    String Cno = getCno.execute(obj.toString()).get().toString();
+
+
+                    obj = new JSONObject();
+                    arr = new JSONArray();
+
+                    obj.put("Type", "INSERT");
+                    obj.put("Table", "mFAVOR");
+                    arr.put("Uid");
+                    arr.put("Cno");
+                    obj.put("Col", arr);
+                    arr = new JSONArray();
+                    arr.put("'"+id.getText().toString()+"'");
+                    arr.put(Cno.substring(8));
+                    obj.put("Value", arr);
+
+                    arr = new JSONArray();
+                    arr.put(obj);
+
+                    obj = new JSONObject();
+                    obj.put("query", arr);
+
+
+                    CustomTask insertFavor = new CustomTask();
+                    insertFavor.execute(obj.toString());
+                }
+
+
+
+            } catch (Exception e) {
                 Log.e("Error JSON", e.getStackTrace().toString());
             }
 
