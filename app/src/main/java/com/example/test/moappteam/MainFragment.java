@@ -118,7 +118,7 @@ public class MainFragment extends Fragment {
                 }
 
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
-                intent.putExtra("MAIN_TEXT",jsonObject.toString());
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
                 startActivity(intent);
             }
         });
@@ -139,7 +139,7 @@ public class MainFragment extends Fragment {
                 }
 
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
-                intent.putExtra("MAIN_TEXT", jsonObject.toString());
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
                 startActivity(intent);
             }
         });
@@ -160,7 +160,7 @@ public class MainFragment extends Fragment {
                 }
 
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
-                intent.putExtra("MAIN_TEXT",jsonObject.toString());
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
                 startActivity(intent);
             }
         });
@@ -181,7 +181,7 @@ public class MainFragment extends Fragment {
                 }
 
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
-                intent.putExtra("MAIN_TEXT", jsonObject.toString());
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
                 startActivity(intent);
             }
         });
@@ -206,7 +206,7 @@ public class MainFragment extends Fragment {
                 }
 
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
-                intent.putExtra("MAIN_TEXT", jsonObject.toString());
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
                 startActivity(intent);
             }
         });
@@ -230,7 +230,7 @@ public class MainFragment extends Fragment {
                 }
 
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
-                intent.putExtra("MAIN_TEXT", jsonObject.toString());
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
                 startActivity(intent);
             }
         });
