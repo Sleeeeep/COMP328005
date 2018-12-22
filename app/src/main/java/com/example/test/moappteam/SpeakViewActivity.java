@@ -1,6 +1,7 @@
 package com.example.test.moappteam;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,8 +12,14 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.test.moappteam.DBpkg.DBClass;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.HttpURLConnection;
+import java.util.Iterator;
 
 public class SpeakViewActivity extends AppCompatActivity {
     private JSONObject jsonObject;
@@ -76,7 +83,89 @@ public class SpeakViewActivity extends AppCompatActivity {
 
         // adapter.addItem("sdf", "user", "12:00:00", 23);
 
-        //replyText = findViewById(R.id.newReply);
-        //replyConfirm = findViewById(R.id.replyBtn);
+        replyText = (EditText) findViewById(R.id.newReply);
+        replyConfirm =(ImageButton)findViewById(R.id.replyBtn);
+
+        replyConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+
+                    JSONObject obj = new JSONObject();
+                    JSONArray arr = new JSONArray();
+
+                    obj.put("Type", "CUSTOM");
+
+                    obj.put("Query", "INSERT INTO mCOMMENT('Content') VALUES ('"+replyText.getText().toString() +"')");
+
+                    arr = new JSONArray();
+                    arr.put(obj);
+
+                    obj = new JSONObject();
+                    obj.put("query", arr);
+
+                    ReplyCustomTask replyTest = new ReplyCustomTask();
+
+                    replyTest.execute(obj.toString());
+
+                    Log.e("REPLY_RESULT", obj.toString());
+
+                } catch (Exception e) {
+
+                }
+
+            }
+        });
+
     }
+
+
+    class ReplyCustomTask extends AsyncTask<String, Void, String> {
+
+        JSONObject json = null;
+        String data = "";
+
+        DBClass mDB;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                mDB = new DBClass(StaticVariables.ipAddress);
+                mDB.setURL();
+
+                if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
+                    Log.i("DB", "url connection error");
+                else {
+                    if (strings[0].contains("SELECT") || strings[0].contains("CUSTOM")) {
+                        json = mDB.getData();
+
+                        JSONArray jArr = json.getJSONArray("response");
+
+                        for (int i = 0; i < jArr.length(); i++) {
+                            data += "\n";
+                            json = jArr.getJSONObject(i);
+                            Iterator<?> iter = json.keys();
+                            while (iter.hasNext()) {
+                                String temp = iter.next().toString();
+                                data += temp + " " + json.getString(temp) + "\n";
+                            }
+                        }
+                    } else
+                        data = mDB.getData().getString("response");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.i("REPLY_RESULT",s);
+        }
+    }
+
+
 }
