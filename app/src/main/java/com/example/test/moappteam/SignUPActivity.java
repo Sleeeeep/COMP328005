@@ -165,7 +165,7 @@ public class SignUPActivity extends AppCompatActivity {
                 arr.put("'"+sid.getText().toString()+"'");
                 arr.put("'"+sName.getText().toString()+"'");
                 arr.put("'"+nickName.getText().toString()+"'");
-                arr.put(String.valueOf(Dno));
+                arr.put(String.valueOf(Dno).substring(8));
                 obj.put("Value", arr);
 
                 arr = new JSONArray();
