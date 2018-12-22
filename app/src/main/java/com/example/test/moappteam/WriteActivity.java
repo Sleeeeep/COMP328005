@@ -143,7 +143,7 @@ public class WriteActivity extends AppCompatActivity {
             obj.put("Type", "CUSTOM");
 
             obj.put("Query", "INSERT INTO mQUESTION('Title','Cname','Content') " +
-                    "VALUES ('"+wTitle +"','"+cNum+"','"+wTxt+"')");
+                    "VALUES ('"+wTitle +"',"+cNum+",'"+wTxt+"')");
 
             arr = new JSONArray();
             arr.put(obj);
