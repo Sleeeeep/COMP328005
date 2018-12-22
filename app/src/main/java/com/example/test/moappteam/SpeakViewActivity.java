@@ -70,7 +70,7 @@ public class SpeakViewActivity extends AppCompatActivity {
             speakUser.setText(jsonObject.getString("Uid"));
             speakTime.setText(jsonObject.getString("Qtime"));
             speakLikeNum.setText(jsonObject.getString("Good"));
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.e("error", "parsing error");
         }
 
