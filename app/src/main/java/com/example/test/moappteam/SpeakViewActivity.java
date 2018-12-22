@@ -34,6 +34,8 @@ public class SpeakViewActivity extends AppCompatActivity {
     private ReplyListViewAdapter adapter = new ReplyListViewAdapter();
     private boolean flag = true;
 
+    private String Qno = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,7 @@ public class SpeakViewActivity extends AppCompatActivity {
             speakUser.setText(jsonObject.getString("Uid"));
             speakTime.setText(jsonObject.getString("Qtime"));
             speakLikeNum.setText(jsonObject.getString("Good"));
+            Qno = jsonObject.getString("Qno");
         } catch (Exception e) {
             Log.e("error", "parsing error");
         }
@@ -89,7 +92,7 @@ public class SpeakViewActivity extends AppCompatActivity {
             JSONArray arr = new JSONArray();
 
             obj.put("Type", "CUSTOM");
-            obj.put("Query", "SELECT * FROM Clist WHERE Qno='" + jsonObject.getString("Qno") + "'");
+            obj.put("Query", "SELECT * FROM Clist WHERE Qno=" + jsonObject.getString("Qno"));
 
             arr.put(obj);
 
@@ -113,13 +116,16 @@ public class SpeakViewActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-
                     JSONObject obj = new JSONObject();
                     JSONArray arr = new JSONArray();
 
-                    obj.put("Type", "CUSTOM");
-
-                    obj.put("Query", "INSERT INTO mCOMMENT('Content') VALUES ('"+replyText.getText().toString() +"')");
+                    obj.put("Type", "INSERT");
+                    obj.put("Table", "mCOMMENT");
+                    arr.put("Content");
+                    obj.put("Col", arr);
+                    arr = new JSONArray();
+                    arr.put("'"+replyText.getText().toString()+"'");
+                    obj.put("Value", arr);
 
                     arr = new JSONArray();
                     arr.put(obj);
@@ -127,11 +133,73 @@ public class SpeakViewActivity extends AppCompatActivity {
                     obj = new JSONObject();
                     obj.put("query", arr);
 
-                    ReplyCustomTask replyTest = new ReplyCustomTask();
+                    ReplyCustomTask insertReply = new ReplyCustomTask();
 
-                    replyTest.execute(obj.toString());
+                    insertReply.execute(obj.toString());
 
-                    Log.e("REPLY_RESULT", obj.toString());
+                    obj = new JSONObject();
+                    arr = new JSONArray();
+
+                    obj.put("Type", "CUSTOM");
+                    obj.put("Query", "SELECT Cnumber FROM mCOMMENT WHERE Content='"+replyText.getText().toString()+"'");
+
+                    arr = new JSONArray();
+                    arr.put(obj);
+
+                    obj = new JSONObject();
+                    obj.put("query", arr);
+
+                    ReplyCustomTask searchReply = new ReplyCustomTask();
+
+                    String Cnum = searchReply.execute(obj.toString()).get();
+
+                    obj = new JSONObject();
+                    arr = new JSONArray();
+
+                    obj.put("Type", "INSERT");
+                    obj.put("Table", "mANSWER");
+                    arr.put("Uid");
+                    arr.put("Cno");
+                    obj.put("Col", arr);
+                    arr = new JSONArray();
+                    arr.put("'"+StaticVariables.sLoginid+"'");
+                    arr.put(Cnum.substring(8));
+                    obj.put("Value", arr);
+
+                    arr = new JSONArray();
+                    arr.put(obj);
+
+                    obj = new JSONObject();
+                    obj.put("query", arr);
+
+                    ReplyCustomTask insertAnswer = new ReplyCustomTask();
+
+                    insertAnswer.execute(obj.toString());
+
+                    obj = new JSONObject();
+                    arr = new JSONArray();
+
+                    obj.put("Type", "INSERT");
+                    obj.put("Table", "mREPLY");
+                    arr.put("Qno");
+                    arr.put("Cno");
+                    obj.put("Col", arr);
+                    arr = new JSONArray();
+                    arr.put(Qno);
+                    arr.put(Cnum.substring(8));
+                    obj.put("Value", arr);
+
+                    arr = new JSONArray();
+                    arr.put(obj);
+
+                    obj = new JSONObject();
+                    obj.put("query", arr);
+
+                    ReplyCustomTask mergeReply = new ReplyCustomTask();
+
+                    mergeReply.execute(obj.toString());
+
+
 
                 } catch (Exception e) {
 
