@@ -94,14 +94,15 @@
                 android:layout_height="15dp" />
 
             <TextView
+                android:id="@+id/hotNum"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_gravity="center"
                 android:background="@color/colorWhite"
                 android:text="0"
-                android:textSize="10sp"
-                style="?android:attr/borderlessButtonStyle"
                 android:textColor="#dd1111"
-                android:layout_gravity="center"/>
+                android:textSize="10sp" />
 
             <ImageView
                 android:layout_width="15dp"
@@ -113,14 +114,15 @@
                 android:src="@drawable/like" />
 
             <TextView
+                android:id="@+id/hotRate"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15sp"
                 android:layout_height="15sp"
+                android:layout_gravity="center"
                 android:background="@color/colorWhite"
                 android:text="0"
-                android:textSize="10sp"
                 android:textColor="#062ff9"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_gravity="center"/>
+                android:textSize="10sp" />
 
         </LinearLayout>
 
@@ -192,14 +194,15 @@
                 android:layout_height="15dp" />
 
             <TextView
+                android:id="@+id/hotNum1"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_gravity="center"
                 android:background="@color/colorWhite"
                 android:text="0"
-                android:textSize="10sp"
-                style="?android:attr/borderlessButtonStyle"
                 android:textColor="#dd1111"
-                android:layout_gravity="center"/>
+                android:textSize="10sp" />
 
             <ImageView
                 android:layout_width="15dp"
@@ -211,14 +214,15 @@
                 android:src="@drawable/like" />
 
             <TextView
+                android:id="@+id/hotRate1"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15sp"
                 android:layout_height="15sp"
+                android:layout_gravity="center"
                 android:background="@color/colorWhite"
                 android:text="0"
-                android:textSize="10sp"
-                style="?android:attr/borderlessButtonStyle"
                 android:textColor="#062ff9"
-                android:layout_gravity="center"/>
+                android:textSize="10sp" />
 
         </LinearLayout>
 

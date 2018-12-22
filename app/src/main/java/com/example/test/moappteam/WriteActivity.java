@@ -54,8 +54,8 @@ public class WriteActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startWite();
-                //finish();
+                startWrite();
+                finish();
             }
         });
 
@@ -85,22 +85,128 @@ public class WriteActivity extends AppCompatActivity {
                 }
         );
 
-
     }
 
-
-    public void startWite(){
+    public void startWrite(){
 
         wTitle = (EditText)findViewById(R.id.writeTitle);
         wTxt = (EditText)findViewById(R.id.inputTxt);
         Log.i("스피너 값",spinner.getSelectedItem().toString());
+        int cNum = 0;
+
+        String cName = spinner.getSelectedItem().toString();
+
+
+        if (cName.equals("알고리즘")){
+            cNum = 1;
+        }else if (cName.equals("자료구조")){
+            cNum = 2;
+        }else if (cName.equals("네트워크")){
+            cNum = 3;
+        }else if (cName.equals("컴퓨터구조")){
+            cNum = 4;
+        }else if (cName.equals("자바")){
+            cNum = 5;
+        }else if (cName.equals("운영체제")){
+            cNum = 6;
+        }else if (cName.equals("시스템")){
+            cNum = 7;
+        }else if (cName.equals("데이터베이스")){
+            cNum = 8;
+        }else if (cName.equals("인공지능")){
+            cNum = 9;
+        }else if (cName.equals("빅데이터")){
+            cNum = 10;
+        }else if (cName.equals("웹")){
+            cNum = 11;
+        }else if (cName.equals("보안")){
+            cNum = 12;
+        }else if (cName.equals("로봇")){
+            cNum = 13;
+        }else if (cName.equals("소프트웨어설계")){
+            cNum = 14;
+        }else if (cName.equals("미디어아트")){
+            cNum = 15;
+        }else if (cName.equals("병렬컴퓨팅")){
+            cNum = 16;
+        }else if (cName.equals("모바일앱프로그래밍")){
+            cNum = 17;
+        }
+
+
+
+        try {
+            JSONObject obj = new JSONObject();
+            JSONArray arr = new JSONArray();
+
+            obj.put("Type", "INSERT");
+            obj.put("Table", "mQUESTION");
+            arr.put("Title");
+            arr.put("Content");
+            arr.put("Cno");
+            obj.put("Col", arr);
+            arr = new JSONArray();
+            arr.put("'"+wTitle.getText().toString()+"'");
+            arr.put("'"+wTxt.getText().toString()+"'");
+            arr.put(cNum);
+            obj.put("Value", arr);
+
+            arr = new JSONArray();
+            arr.put(obj);
+
+            obj = new JSONObject();
+            obj.put("query", arr);
+
+            WriteActivity.WriteCustomTask mainTest = new WriteActivity.WriteCustomTask();
+
+            mainTest.execute(obj.toString());
+
+            obj = new JSONObject();
+            arr = new JSONArray();
+
+            obj.put("Type", "CUSTOM");
+            obj.put("Query", "SELECT Qnumber FROM mQUESTION WHERE Title='"+wTitle.getText().toString()+"' AND Content='"+wTxt.getText().toString()+"'");
+
+            arr = new JSONArray();
+            arr.put(obj);
+
+            obj = new JSONObject();
+            obj.put("query", arr);
+
+            WriteActivity.WriteCustomTask getQno = new WriteCustomTask();
+            String Qnum = getQno.execute(obj.toString()).get();
+
+            obj = new JSONObject();
+            arr = new JSONArray();
+
+            obj.put("Type", "INSERT");
+            obj.put("Table", "mASK");
+            arr.put("Uid");
+            arr.put("Qno");
+            obj.put("Col", arr);
+            arr = new JSONArray();
+            arr.put("'"+StaticVariables.sLoginid+"'");
+            arr.put(Qnum.substring(8));
+            obj.put("Value", arr);
+
+            arr = new JSONArray();
+            arr.put(obj);
+
+            obj = new JSONObject();
+            obj.put("query", arr);
+
+            WriteActivity.WriteCustomTask insertAsk = new WriteActivity.WriteCustomTask();
+
+            insertAsk.execute(obj.toString());
+
+        } catch (Exception e) {
+
+        }
 
 
     }
 
-
-
-    class CustomTask extends AsyncTask<String, Void, String> {
+    class WriteCustomTask extends AsyncTask<String, Void, String> {
 
         JSONObject json = null;
         String data = "";
@@ -110,7 +216,7 @@ public class WriteActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                mDB = new DBClass("http://155.230.84.186:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass(StaticVariables.ipAddress);
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
@@ -142,7 +248,7 @@ public class WriteActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("RESULT",s);
+            Log.i("WRITE_RESULT",s);
         }
     }
 

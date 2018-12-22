@@ -49,8 +49,8 @@ public class SpeakListViewAdapter extends BaseAdapter {
         userTextView.setText(speakListItem.getUser());
         timeTextView.setText(speakListItem.getTime());
         classifyTextView.setText(speakListItem.getClassify());
-        replyNumTextView.setText(""+speakListItem.getReplyNum());
-        likeNumTextView.setText(""+speakListItem.getLikeNum());
+        replyNumTextView.setText(Integer.toString(speakListItem.getReplyNum()));
+        likeNumTextView.setText(Integer.toString(speakListItem.getLikeNum()));
         textTextView.setText(speakListItem.getText());
 
         return convertView;
@@ -85,12 +85,24 @@ public class SpeakListViewAdapter extends BaseAdapter {
             else
                 item.setReplyNum(0);
             item.setLikeNum(obj.getInt("Good"));
+            String str = obj.getString("Content");
+            if(str.length() > 30)
+                item.setText(str.substring(0, 30) + "...");
+            else
+                item.setText(str);
+            item.setObj(obj);
 
             speakListItemList.add(item);
         } catch (Exception e){
             Log.i("Error", "Err");
         }
 
+    }
+    public void resetItem() {
+        speakListItemList = new ArrayList<>();
+    }
+    public JSONObject getJSONobj(int pos) {
+        return speakListItemList.get(pos).getObj();
     }
 }
 

@@ -93,7 +93,7 @@
                 android:src="@drawable/comment" />
 
             <TextView
-                android:id="@+id/newQuestionComment"
+                android:id="@+id/newNum"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
@@ -113,7 +113,7 @@
                 android:src="@drawable/like" />
 
             <TextView
-                android:id="@+id/newQuestionLike"
+                android:id="@+id/newRate"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15sp"
                 android:layout_height="15sp"
@@ -196,6 +196,7 @@
                 android:src="@drawable/comment" />
 
             <Button
+                android:id="@+id/newNum1"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
@@ -215,6 +216,7 @@
                 android:src="@drawable/like" />
 
             <Button
+                android:id="@+id/newRate1"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15sp"
                 android:layout_height="15sp"

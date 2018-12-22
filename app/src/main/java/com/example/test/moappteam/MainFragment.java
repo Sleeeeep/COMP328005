@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.test.moappteam.DBpkg.DBClass;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
@@ -35,46 +36,42 @@ public class MainFragment extends Fragment {
     LinearLayout new2;
 
     TextView interId1;
-    TextView interId2 ;
-
+    TextView interId2;
     TextView interTime1;
     TextView interTime2;
-
     TextView interTitle1;
     TextView interTitle2;
-
     TextView interCla1;
     TextView interCla2;
-
     TextView hotId1;
     TextView hotId2;
-
     TextView hotTime1;
     TextView hotTime2;
-
     TextView hotTitle1;
     TextView hotTitle2;
-
     TextView hotCla1;
     TextView hotCla2;
-
     TextView newId1;
     TextView newId2;
-
     TextView newTime1;
     TextView newTime2;
-
     TextView newTitle1;
     TextView newTitle2;
-
     TextView newCla1;
     TextView newCla2;
+    TextView interNum1;
+    TextView interNum2;
+    TextView hotNum1;
+    TextView hotNum2;
+    TextView newNum1;
+    TextView newNum2;
+    TextView interRate1;
+    TextView interRate2;
+    TextView hotRate1;
+    TextView hotRate2;
+    TextView newRate1;
+    TextView newRate2;
 
-    Boolean Flag = true;
-
-    String result;
-
-    private Fragment frag = this;
 
     public MainFragment() {
         // Required empty public constructor
@@ -97,7 +94,6 @@ public class MainFragment extends Fragment {
         new2 = (LinearLayout)view.findViewById(R.id.scrollInLay).findViewById(R.id.newQ2);
 
         setListener();
-
         setView();
 
         return view;
@@ -109,48 +105,125 @@ public class MainFragment extends Fragment {
         interest1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getActivity(),SpeakViewActivity.class);
-                startActivity(intent1);
+
+                String result = StaticVariables.mainFResult;
+                JSONObject jsonObject = null;
+                try{
+
+                    JSONArray jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(0);
+
+                }catch (JSONException e){
+
+                }
+
+                Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
+                startActivity(intent);
             }
         });
 
         interest2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getActivity(),SpeakViewActivity.class);
-                startActivity(intent1);
+
+                String result = StaticVariables.mainFResult;
+                JSONObject jsonObject = null;
+                try{
+
+                    JSONArray jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(1);
+
+                }catch (JSONException e){
+
+                }
+
+                Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
+                startActivity(intent);
             }
         });
 
         hot1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getActivity(),SpeakViewActivity.class);
-                startActivity(intent1);
+
+                String result = StaticVariables.mainHResult;
+                JSONObject jsonObject = null;
+                try{
+
+                    JSONArray jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(0);
+
+                }catch (JSONException e){
+
+                }
+
+                Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
+                startActivity(intent);
             }
         });
 
         hot2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getActivity(),SpeakViewActivity.class);
-                startActivity(intent1);
+
+                String result = StaticVariables.mainHResult;
+                JSONObject jsonObject = null;
+                try{
+
+                    JSONArray jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(1);
+
+                }catch (JSONException e){
+
+                }
+
+                Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
+                startActivity(intent);
             }
         });
 
         new1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getActivity(),SpeakViewActivity.class);
-                startActivity(intent1);
+
+                String result = StaticVariables.mainNResult;
+                JSONObject jsonObject = null;
+
+                try{
+
+                    JSONArray jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(0);
+                }catch (JSONException e){
+
+                }
+
+                Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
+                startActivity(intent);
             }
         });
 
         new2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getActivity(),SpeakViewActivity.class);
-                startActivity(intent1);
+
+                String result = StaticVariables.mainNResult;
+                JSONObject jsonObject = null;
+
+                try{
+
+                    JSONArray jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(1);
+                }catch (JSONException e){
+
+                }
+                Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
+                startActivity(intent);
             }
         });
     }
@@ -159,80 +232,138 @@ public class MainFragment extends Fragment {
         //화면을 구성하는 정보를 설정하는 함수
 
         interId1 =  (TextView) interest1.findViewById(R.id.interQuestionId);
-        interId2 =  (TextView) interest1.findViewById(R.id.interQuestionId1);
+        interId2 =  (TextView) interest2.findViewById(R.id.interQuestionId1);
 
         interTime1 =  (TextView) interest1.findViewById(R.id.interQuestionTime);
-        interTime2 =  (TextView) interest1.findViewById(R.id.interQuestionTime1);
+        interTime2 =  (TextView) interest2.findViewById(R.id.interQuestionTime1);
 
         interTitle1 =  (TextView) interest1.findViewById(R.id.interQuestionTitle);
-        interTitle2 =  (TextView) interest1.findViewById(R.id.interQuestionTitle1);
+        interTitle2 =  (TextView) interest2.findViewById(R.id.interQuestionTitle1);
 
         interCla1 =  (TextView) interest1.findViewById(R.id.interQuestionInter);
-        interCla2 =  (TextView) interest1.findViewById(R.id.interQuestionInter1);
+        interCla2 =  (TextView) interest2.findViewById(R.id.interQuestionInter1);
 
-        hotId1 =  (TextView) interest1.findViewById(R.id.hotQuestionId);
-        hotId2 =  (TextView) interest1.findViewById(R.id.hotQuestionId1);
+        hotId1 =  (TextView) hot1.findViewById(R.id.hotQuestionId);
+        hotId2 =  (TextView) hot2.findViewById(R.id.hotQuestionId1);
 
-        hotTime1 =  (TextView) interest1.findViewById(R.id.hotQuestionTime);
-        hotTime2 =  (TextView) interest1.findViewById(R.id.hotQuestionTime1);
+        hotTime1 =  (TextView) hot1.findViewById(R.id.hotQuestionTime);
+        hotTime2 =  (TextView) hot2.findViewById(R.id.hotQuestionTime1);
 
-        hotTitle1 =  (TextView) interest1.findViewById(R.id.hotQuestionTitle);
-        hotTitle2 =  (TextView) interest1.findViewById(R.id.hotQuestionTitle1);
+        hotTitle1 =  (TextView) hot1.findViewById(R.id.hotQuestionTitle);
+        hotTitle2 =  (TextView) hot2.findViewById(R.id.hotQuestionTitle1);
 
-        hotCla1 =  (TextView) interest1.findViewById(R.id.hotQuestionInterest);
-        hotCla2 =  (TextView) interest1.findViewById(R.id.hotQuestionInterest1);
+        hotCla1 =  (TextView) hot1.findViewById(R.id.hotQuestionInterest);
+        hotCla2 =  (TextView) hot2.findViewById(R.id.hotQuestionInterest1);
 
-        newId1 =  (TextView) interest1.findViewById(R.id.newQuestionId);
-        newId2 =  (TextView) interest1.findViewById(R.id.newQuestionId1);
+        newId1 =  (TextView) new1.findViewById(R.id.newQuestionId);
+        newId2 =  (TextView) new2.findViewById(R.id.newQuestionId1);
 
-        newTime1 =  (TextView) interest1.findViewById(R.id.newQuestionTime);
-        newTime2 =  (TextView) interest1.findViewById(R.id.newQuestionTime1);
+        newTime1 =  (TextView) new1.findViewById(R.id.newQuestionTime);
+        newTime2 =  (TextView) new2.findViewById(R.id.newQuestionTime1);
 
-        newTitle1 =  (TextView) interest1.findViewById(R.id.newQuestionTitle);
-        newTitle2 =  (TextView) interest1.findViewById(R.id.newQuestionTitle1);
+        newTitle1 =  (TextView) new1.findViewById(R.id.newQuestionTitle);
+        newTitle2 =  (TextView) new2.findViewById(R.id.newQuestionTitle1);
 
-        newCla1 =  (TextView) interest1.findViewById(R.id.newQuestionInterest);
-        newCla2 =  (TextView) interest1.findViewById(R.id.newQuestionInterest1);
+        newCla1 =  (TextView) new1.findViewById(R.id.newQuestionInterest);
+        newCla2 =  (TextView) new2.findViewById(R.id.newQuestionInterest1);
+
+        interNum1 =  (TextView) interest1.findViewById(R.id.interNum);
+        interNum2 =  (TextView) interest2.findViewById(R.id.interNum1);
+
+        hotNum1 =  (TextView) hot1.findViewById(R.id.hotNum);
+        hotNum2 =  (TextView) hot2.findViewById(R.id.hotNum1);
+
+        newNum1 =  (TextView) new1.findViewById(R.id.newNum);
+        newNum2 =  (TextView) new2.findViewById(R.id.newNum1);
+
+        interRate1 =  (TextView) interest1.findViewById(R.id.interRate);
+        interRate2 =  (TextView) interest2.findViewById(R.id.interRate1);
+
+        hotRate1 =  (TextView) hot1.findViewById(R.id.hotRate);
+        hotRate2 =  (TextView) hot2.findViewById(R.id.hotRate1);
+
+        newRate1 =  (TextView) new1.findViewById(R.id.newRate);
+        newRate2 =  (TextView) new2.findViewById(R.id.newRate1);
 
         //메인프레그먼트 세팅
 
-        Log.i("MainFResult",StaticVariables.mainResult);
+        Log.i("MainFResult",StaticVariables.mainFResult);
 
         try{
 
-            JSONArray jArr = new JSONArray(StaticVariables.mainResult);
+            JSONArray jArr = new JSONArray(StaticVariables.mainFResult);
+            JSONObject obj = jArr.getJSONObject(0);
+            Log.i("jArr",StaticVariables.mainFResult);
 
-            interId1.setText(""+jArr.getJSONObject(0).toString());
-            interId2.setText(""+jArr.getJSONObject(1).getString("Uid"));
-            interTime1.setText(""+jArr.getJSONObject(0).getString("Qtime"));
-            interTime2.setText(""+jArr.getJSONObject(1).getString("Qtime"));
-            interTitle1.setText(""+jArr.getJSONObject(0).getString("Title"));
-            interTitle2.setText(""+jArr.getJSONObject(1).getString("Title"));
-            interCla1.setText(""+jArr.getJSONObject(0).getString("Cname"));
-            interCla2.setText(""+jArr.getJSONObject(1).getString("Cname"));
+            interId1.setText(""+obj.getString("Uid"));
+            interTime1.setText(""+obj.getString("Qtime"));
+            interTitle1.setText(""+obj.getString("Title"));
+            interCla1.setText(""+obj.getString("Cname"));
+            interNum1.setText(""+obj.getString("Ccnt"));
+            interRate1.setText(""+obj.getString("Good"));
 
-            hotId1.setText(""+jArr.getJSONObject(2).getString("Uid"));
-            hotId2.setText(""+jArr.getJSONObject(3).getString("Uid"));
-            hotTime1.setText(""+jArr.getJSONObject(2).getString("Qtime"));
-            hotTime2.setText(""+jArr.getJSONObject(3).getString("Qtime"));
-            hotTitle1.setText(""+jArr.getJSONObject(2).getString("Title"));
-            hotTitle2.setText(""+jArr.getJSONObject(3).getString("Title"));
-            hotCla1.setText(""+jArr.getJSONObject(2).getString("Cname"));
-            hotCla2.setText(""+jArr.getJSONObject(3).getString("Cname"));
+            obj = jArr.getJSONObject(1);
 
-            newId1.setText(""+jArr.getJSONObject(4).getString("Uid"));
-            newId2.setText(""+jArr.getJSONObject(5).getString("Uid"));
-            newTime1.setText(""+jArr.getJSONObject(4).getString("Qtime"));
-            newTime2.setText(""+jArr.getJSONObject(5).getString("Qtime"));
-            newTitle1.setText(""+jArr.getJSONObject(4).getString("Title"));
-            newTitle2.setText(""+jArr.getJSONObject(5).getString("Title"));
-            newCla1.setText(""+jArr.getJSONObject(4).getString("Cname"));
-            newCla2.setText(""+jArr.getJSONObject(5).getString("Cname"));
+            interId2.setText(""+obj.getString("Uid"));
+            interTime2.setText(""+obj.getString("Qtime"));
+            interTitle2.setText(""+obj.getString("Title"));
+            interCla2.setText(""+obj.getString("Cname"));
+            interNum2.setText(""+obj.getString("Ccnt"));
+            interRate2.setText(""+obj.getString("Good"));
 
-        }catch (Exception e){
-            Log.e("setView Error","setView Error");
+            jArr = new JSONArray(StaticVariables.mainHResult);
+            obj = jArr.getJSONObject(0);
+            Log.i("jArr",StaticVariables.mainHResult);
+
+            hotId1.setText(""+obj.getString("Uid"));
+            hotTime1.setText(""+obj.getString("Qtime"));
+            hotTitle1.setText(""+obj.getString("Title"));
+            hotCla1.setText(""+obj.getString("Cname"));
+            hotNum1.setText(""+obj.getString("Ccnt"));
+            hotRate1.setText(""+obj.getString("Good"));
+
+            obj = jArr.getJSONObject(1);
+
+            hotId2.setText(""+obj.getString("Uid"));
+            hotTime2.setText(""+obj.getString("Qtime"));
+            hotTitle2.setText(""+obj.getString("Title"));
+            hotCla2.setText(""+obj.getString("Cname"));
+            hotNum2.setText(""+obj.getString("Ccnt"));
+            hotRate2.setText(""+obj.getString("Good"));
+
+//            String subResult = StaticVariables.mainResult.substring(jArr.toString().length());
+//            Log.i("subResult",subResult);
+//
+//            jArr = new JSONArray(subResult);
+//            obj = jArr.getJSONObject(0);
+
+            jArr = new JSONArray(StaticVariables.mainNResult);
+            obj = jArr.getJSONObject(0);
+            Log.i("jArr",StaticVariables.mainNResult);
+
+            newId1.setText(""+obj.getString("Uid"));
+            newTime1.setText(""+obj.getString("Qtime"));
+            newTitle1.setText(""+obj.getString("Title"));
+            newCla1.setText(""+obj.getString("Cname"));
+            newNum1.setText(""+obj.getString("Ccnt"));
+            newRate1.setText(""+obj.getString("Good"));
+
+            obj = jArr.getJSONObject(1);
+
+            newId2.setText(""+obj.getString("Uid"));
+            newTime2.setText(""+obj.getString("Qtime"));
+            newTitle2.setText(""+obj.getString("Title"));
+            newCla2.setText(""+obj.getString("Cname"));
+            newNum2.setText(""+obj.getString("Ccnt"));
+            newRate2.setText(""+obj.getString("Good"));
+
+            Log.e("setView","setView");
+
+        }catch (JSONException e){
+            Log.e("setView Error",e.toString());
         }
 
     }
+
 
 }

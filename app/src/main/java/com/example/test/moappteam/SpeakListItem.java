@@ -1,5 +1,7 @@
 package com.example.test.moappteam;
 
+import org.json.JSONObject;
+
 public class SpeakListItem {
     private int speakNum;
     private String title;
@@ -9,6 +11,7 @@ public class SpeakListItem {
     private String text;
     private int replyNum;
     private int likeNum;
+    private JSONObject obj;
 
     public void setTitle(String title) {
         this.title = title;
@@ -34,6 +37,9 @@ public class SpeakListItem {
     public void setSpeakNum(int speakNum) {
         this.speakNum = speakNum;
     }
+    public void setObj(JSONObject obj) {
+        this.obj = obj;
+    }
 
     public String getTitle() {
         return title;
@@ -58,5 +64,8 @@ public class SpeakListItem {
     }
     public int getSpeakNum() {
         return speakNum;
+    }
+    public JSONObject getObj() {
+        return obj;
     }
 }

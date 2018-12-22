@@ -42,7 +42,7 @@
             android:layout_marginHorizontal="5dp"
             android:padding="2dp"
             android:textStyle="bold"
-            android:text="Id : " />
+            android:text="ID : " />
 
         <TextView
             android:id="@+id/rankUser"
@@ -50,8 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:layout_gravity="center"
-            android:text="none"/>
+            android:layout_gravity="center"/>
 
         <ImageView
             android:layout_width="15dp"
@@ -62,10 +61,10 @@
 
         <TextView
             android:id="@+id/rankCom"
-            android:layout_width="20dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="0"
+            android:gravity="right"
             android:textStyle="bold"
             android:layout_marginHorizontal="5dp" />
 
@@ -78,11 +77,11 @@
 
         <TextView
             android:id="@+id/rankRate"
-            android:layout_width="20dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0"
+            android:layout_gravity="center_vertical"
             android:textStyle="bold"
+            android:gravity="right"
             android:layout_marginHorizontal="5dp" />
 
 

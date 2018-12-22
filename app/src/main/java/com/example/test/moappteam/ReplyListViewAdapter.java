@@ -1,11 +1,14 @@
 package com.example.test.moappteam;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -69,6 +72,25 @@ public class ReplyListViewAdapter extends BaseAdapter {
         item.setLikeNum(likeNum);
 
         replyListItemList.add(item);
+    }
+    public void addItem(JSONObject obj) {
+        ReplyListItem item = new ReplyListItem();
+
+        Log.i("replyQuery",obj.toString());
+
+        try {
+            item.setText(obj.getString("Content"));
+            item.setUser(obj.getString("Uid"));
+            item.setTime(obj.getString("Ctime"));
+            item.setLikeNum(obj.getInt("Good"));
+        }catch(Exception e) {
+
+        }
+
+        replyListItemList.add(item);
+    }
+    public void resetItem() {
+        replyListItemList = new ArrayList<>();
     }
 }
 

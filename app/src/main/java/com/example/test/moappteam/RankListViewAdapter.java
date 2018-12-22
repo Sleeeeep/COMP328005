@@ -1,16 +1,18 @@
 package com.example.test.moappteam;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class RankListViewAdapter extends BaseAdapter {
-
     private ArrayList<RankListItem> rankListItemList = new ArrayList<RankListItem>();
 
     public RankListViewAdapter() {}
@@ -70,5 +72,22 @@ public class RankListViewAdapter extends BaseAdapter {
         item.setRank(rank);
 
         rankListItemList.add(item);
+    }
+    public void addItem(JSONObject obj, int rank) {
+        RankListItem item = new RankListItem();
+
+        try {
+            item.setUser(obj.getString("Id"));
+            item.setLikeNum(obj.getInt("Good"));
+            item.setRank(rank);
+            item.setReplyNum(obj.getInt("Cnt"));
+
+            rankListItemList.add(item);
+        } catch (Exception e) {
+            Log.e("Error", "JSON 에러");
+        }
+    }
+    public void resetItem() {
+        rankListItemList = new ArrayList<>();
     }
 }
