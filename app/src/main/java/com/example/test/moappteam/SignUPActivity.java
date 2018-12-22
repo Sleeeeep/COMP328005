@@ -175,7 +175,7 @@ public class SignUPActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass(StaticVariables.ipAddress);
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)

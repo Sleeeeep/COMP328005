@@ -51,8 +51,8 @@ public class SpeakViewActivity extends AppCompatActivity {
         speakUser = findViewById(R.id.speakViewWho);
         speakTime = findViewById(R.id.speakViewTime);
         speakText = findViewById(R.id.speakViewText);
-        speakLikeButton = findViewById(R.id.speakLikeButton);
-        speakLikeNum = findViewById(R.id.speakViewLikeNum);
+        speakLikeButton = (ImageButton) findViewById(R.id.speakLikeButton);
+        speakLikeNum = (TextView) findViewById(R.id.speakViewLikeNum);
 
         adapter = new ReplyListViewAdapter();
         replyListView.setAdapter(adapter);
@@ -74,6 +74,9 @@ public class SpeakViewActivity extends AppCompatActivity {
         speakLikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int like = Integer.parseInt(""+speakLikeNum.getText().toString());
+                Log.i("myLike", String.valueOf(like));
+                speakLikeNum.setText(String.valueOf(like+1));
                 upLike();
             }
         });
@@ -324,7 +327,7 @@ public class SpeakViewActivity extends AppCompatActivity {
             arr.put("Good=Good+1");
             obj.put("Value", arr);
             arr = new JSONArray();
-            arr.put("Qno=" + Qno);
+            arr.put("Qnumber=" + Qno);
             obj.put("Cond", arr);
 
             arr = new JSONArray();
