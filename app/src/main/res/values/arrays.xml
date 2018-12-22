@@ -21,6 +21,27 @@
         <item>컴퓨터구조</item>
     </string-array>
 
+    <string-array name="favor_nullable">
+        <item>전체</item>
+        <item>모바일앱프로그래밍</item>
+        <item>네트워크</item>
+        <item>데이터베이스</item>
+        <item>로봇</item>
+        <item>미디어아트</item>
+        <item>병렬컴퓨팅</item>
+        <item>보안</item>
+        <item>빅데이터</item>
+        <item>소프트웨어설계</item>
+        <item>시스템</item>
+        <item>알고리즘</item>
+        <item>운영체제</item>
+        <item>웹</item>
+        <item>인공지능</item>
+        <item>자료구조</item>
+        <item>자바</item>
+        <item>컴퓨터구조</item>
+    </string-array>
+
     <string-array name="major">
         <item>컴퓨터학부</item>
         <item>전자공학부</item>
