@@ -31,6 +31,8 @@ public class SpeakViewActivity extends AppCompatActivity {
     private TextView speakText;
     private ImageButton speakLikeButton;
     private TextView speakLikeNum;
+    private ReplyListViewAdapter adapter = new ReplyListViewAdapter();
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class SpeakViewActivity extends AppCompatActivity {
         speakLikeButton = findViewById(R.id.speakLikeButton);
         speakLikeNum = findViewById(R.id.speakViewLikeNum);
 
-        ReplyListViewAdapter adapter = new ReplyListViewAdapter();
+        adapter = new ReplyListViewAdapter();
         replyListView.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.speakToolbar);
@@ -81,7 +83,27 @@ public class SpeakViewActivity extends AppCompatActivity {
             Log.e("error", "parsing error");
         }
 
-        // adapter.addItem("sdf", "user", "12:00:00", 23);
+        try {
+            adapter.resetItem();
+            JSONObject obj = new JSONObject();
+            JSONArray arr = new JSONArray();
+
+            obj.put("Type", "CUSTOM");
+            obj.put("Query", "SELECT * FROM Clist WHERE Qno='" + jsonObject.getString("Qno") + "'");
+
+            arr.put(obj);
+
+            obj = new JSONObject();
+            obj.put("query", arr);
+
+            SpeakViewActivity.ReplyViewTask viewTextList = new SpeakViewActivity.ReplyViewTask();
+            viewTextList.execute(obj.toString());
+            Log.e("RESULT", obj.toString());
+        } catch (JSONException e) {
+            Log.i("게시판리스트 json", e.getStackTrace().toString());
+        }
+
+        //  adapter.addItem("sdf", "user", "12:00:00", 23);
 
         replyText = (EditText) findViewById(R.id.newReply);
         replyConfirm =(ImageButton)findViewById(R.id.replyBtn);
@@ -120,6 +142,51 @@ public class SpeakViewActivity extends AppCompatActivity {
 
     }
 
+    class ReplyViewTask extends AsyncTask<String, Void, JSONArray> {
+
+        JSONObject json = null;
+
+        DBClass mDB;
+
+        @Override
+        protected JSONArray doInBackground(String... strings) {
+            JSONArray jArr = new JSONArray();
+            try {
+                mDB = new DBClass(StaticVariables.ipAddress);
+                mDB.setURL();
+
+                Log.i("url", strings[0]);
+                if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
+                    Log.i("DB", "url connection error");
+                else {
+                    if (strings[0].contains("SELECT") || strings[0].contains("CUSTOM")) {
+                        json = mDB.getData();
+
+                        jArr = json.getJSONArray("response");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return jArr;
+        }
+
+        @Override
+        protected void onPostExecute(JSONArray arr) {
+            Log.i("RESULT", arr.toString());
+            super.onPostExecute(arr);
+            for (int i = arr.length() - 1; i >= 0; i--) {
+                try {
+                    adapter.addItem(arr.getJSONObject(i));
+                    Log.i("arr",arr.getJSONObject(i).toString() );
+                } catch (Exception e) {
+                    Log.e("Error", "erer");
+                }
+            }
+            Log.i("notify","리프레시");
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     class ReplyCustomTask extends AsyncTask<String, Void, String> {
 
