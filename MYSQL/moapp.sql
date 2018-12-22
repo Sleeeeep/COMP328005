@@ -182,7 +182,7 @@ SELECT * FROM HOT_Qlist;
 
 DROP VIEW IF EXISTS Qlist;
 CREATE VIEW Qlist AS
-	SELECT Uid, Title, Content, Cname, Qtime, Ccnt, Rating, Good FROM (SELECT Qno, COUNT(*) AS Ccnt FROM mREPLY GROUP BY Qno) R RIGHT JOIN (SELECT Qno, Uid, Title, Content, Cname, Qtime, Rating, Good FROM mCATEGORY JOIN (SELECT Qno, Uid, Title, Content, Cno, Qtime, Rating, Good FROM mQUESTION JOIN mASK ON Qnumber=Qno) Q ON Cnumber=Cno) Q On Q.Qno=R.Qno;
+	SELECT R.Qno, Uid, Title, Content, Cname, Qtime, Ccnt, Rating, Good FROM (SELECT Qno, COUNT(*) AS Ccnt FROM mREPLY GROUP BY Qno) R RIGHT JOIN (SELECT Qno, Uid, Title, Content, Cname, Qtime, Rating, Good FROM mCATEGORY JOIN (SELECT Qno, Uid, Title, Content, Cno, Qtime, Rating, Good FROM mQUESTION JOIN mASK ON Qnumber=Qno) Q ON Cnumber=Cno) Q On Q.Qno=R.Qno ORDER BY Qtime ASC;
 SELECT * FROM Qlist;
 
 DROP VIEW IF EXISTS Clist;
@@ -201,7 +201,8 @@ SELECT * FROM Ranking;
 DROP VIEW IF EXISTS Mypage;
 CREATE VIEW Mypage AS
 	SELECT Id, Name, Nick, Dname, Qcnt, COUNT(Cno) AS Ccnt FROM mANSWER RIGHT JOIN (SELECT Id, Name, Nick, Dname, COUNT(Qno) AS Qcnt FROM (SELECT * FROM mUSER LEFT JOIN mDEPARTMENT ON Dno=Dnumber) U LEFT JOIN mASK ON Id=Uid GROUP BY Id) A ON Uid=Id GROUP BY Id;
-SELECT * FROM Mypage;
+SELECT Name, Nick, Dname, Qcnt, Ccnt, Ranking FROM Mypage M JOIN (SELECT @n:=@n+1 AS Ranking, Id FROM Ranking, (SELECT @n:=0) t) R ON R.Id=M.Id WHERE M.Id='test1';
+
 
 
 SELECT * FROM mDEPARTMENT;
@@ -267,7 +268,7 @@ INSERT INTO mQUESTION(Title, Cno, Content) VALUES ('test3', 4, '가나다라마�
 INSERT INTO mQUESTION(Title, Cno, Content) VALUES ('test4', 10, 'asdasfasfasafasfasfasf팜나람나갑작ㅂ잗ㅂㅈ');
 INSERT INTO mQUESTION(Title, Cno, Content) VALUES ('test5', 1, 'ㅠㅠ');
 
-INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('xIYX77', 1, '강원도 군포시 덕양구', '2019-08-10', 145);
+INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('xIYX77', 1, '강원도 군포시 덕양구', '2018-08-10', 145);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('QC35L2L', 6, '충청남도 창원시 기흥구', '2013-06-11', 671);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('KK5Nu23', 3, '광주광역시 영천시 영도구', '2014-01-12', 99);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('FEujOK', 12, '대전광역시 수원시 영통구', '2018-03-12', 73);
@@ -280,10 +281,10 @@ INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('1m82Vr', 9, '�
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('60Ld32', 17, '충청북도 수원시 단원구', '2010-02-19', 330);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('ZSdL7', 14, '서울특별시 수원시 마산합포구', '2015-05-11', 208);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('b71VTB2', 17, '부산광역시 목포시 소사구', '2015-01-07', 41);
-INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('2nrnDO', 9, '부산광역시 원주시 덕양구', '2019-04-27', 492);
+INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('2nrnDO', 9, '부산광역시 원주시 덕양구', '2018-04-27', 492);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('0g0Rp', 2, '경기도 김포시 마산합포구', '2016-01-23', 736);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('GK1hS7P', 14, '전라북도 화성시 중구', '2016-05-12', 906);
-INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('M6YhIie', 7, '부산광역시 이천시 서구', '2019-12-13', 225);
+INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('M6YhIie', 7, '부산광역시 이천시 서구', '2018-12-13', 225);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('KHcpf83', 9, '경상북도 춘천시 단원구', '2011-03-07', 291);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('69v2IL', 11, '대구광역시 김포시 진해구', '2014-03-05', 703);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('3g0qq', 8, '인천광역시 제천시 중원구', '2013-06-24', 831);
@@ -291,7 +292,7 @@ INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('GHPJa', 10, '�
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('5smiLO8', 6, '충청남도 경산시 마산합포구', '2013-02-18', 246);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('Ss6sIfL', 11, '부산광역시 김포시 소사구', '2017-07-20', 590);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('w59P60', 5, '전라남도 성남시 북구', '2012-08-20', 533);
-INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('y8dl85', 6, '강원도 공주시 영도구', '2019-01-22', 812);
+INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('y8dl85', 6, '강원도 공주시 영도구', '2018-01-22', 812);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('c8M1VP', 7, '전라남도 여수시 북구', '2014-01-26', 939);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('DMy98l', 5, '충청북도 속초시 강서구', '2011-09-22', 193);
 INSERT INTO mQUESTION(Title, Cno, Content, Qtime, Good) VALUES ('Sn659', 10, '제주시 창원시 동구', '2017-08-10', 999);
@@ -311,7 +312,7 @@ INSERT INTO mCOMMENT(Content) VALUES ('test');
 INSERT INTO mCOMMENT(Content) VALUES ('test');
 
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('자이아파트 202동 203호', '2011-04-07', 370);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('드림뷰아파트 101동 104호', '2019-11-22', 206);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('드림뷰아파트 101동 104호', '2018-11-22', 206);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('뜨란채아파트 103동 104호', '2017-02-01', 617);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('롯데캐슬아파트 201동 204호', '2016-10-26', 345);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('두산위브아파트 103동 104호', '2010-03-14', 491);
@@ -343,7 +344,7 @@ INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('드림뷰아파트 301동 40
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('푸르지오아파트 303동 401호', '2015-11-14', 347);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼정그린코아아파트 202동 104호', '2014-08-18', 468);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('로얄팰리스아파트 301동 303호', '2014-02-19', 531);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 201동 202호', '2019-10-03', 32);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 201동 202호', '2018-10-03', 32);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('그랜드파크아파트 301동 302호', '2011-12-03', 927);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('자이아파트 303동 102호', '2012-06-27', 60);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('뜨란채아파트 101동 204호', '2015-03-24', 964);
@@ -353,10 +354,10 @@ INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 302
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('코오롱하늘채아파트 303동 401호', '2017-05-11', 109);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('e-편한세상아파트 101동 102호', '2012-03-11', 488);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('뜨란채아파트 103동 201호', '2015-06-09', 283);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('롯데캐슬아파트 203동 404호', '2019-11-21', 622);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('롯데캐슬아파트 203동 404호', '2018-11-21', 622);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('코오롱하늘채아파트 101동 402호', '2013-05-03', 516);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('로얄팰리스아파트 302동 102호', '2018-04-25', 656);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 102동 201호', '2019-05-19', 110);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 102동 201호', '2018-05-19', 110);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 202동 203호', '2018-09-03', 610);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 303동 403호', '2014-05-07', 644);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('뜨란채아파트 301동 203호', '2018-10-18', 30);
@@ -365,12 +366,12 @@ INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('아이프라임아파트 101
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('롯데캐슬아파트 203동 104호', '2016-11-17', 800);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('LH아파트 102동 402호', '2011-12-06', 392);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('아이프라임아파트 301동 104호', '2011-01-12', 77);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('휴먼시아아파트 202동 402호', '2019-10-17', 275);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('휴먼시아아파트 202동 402호', '2018-10-17', 275);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 103동 403호', '2015-02-01', 14);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('그랜드파크아파트 101동 102호', '2014-03-27', 963);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼환나우빌아파트 201동 103호', '2014-02-01', 320);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('LH아파트 303동 304호', '2019-01-25', 517);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('푸르지오아파트 303동 104호', '2019-04-09', 429);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('LH아파트 303동 304호', '2018-01-25', 517);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('푸르지오아파트 303동 104호', '2018-04-09', 429);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('두산위브아파트 203동 204호', '2014-09-02', 257);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('우방타운아파트 202동 103호', '2016-05-03', 262);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('코오롱하늘채아파트 201동 204호', '2015-12-26', 939);
@@ -397,7 +398,7 @@ INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('두산위브아파트 302동
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('우방타운아파트 303동 302호', '2012-01-23', 761);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('코오롱하늘채아파트 303동 202호', '2011-03-22', 698);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('휴먼시아아파트 303동 104호', '2014-09-18', 379);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('그랜드파크아파트 103동 404호', '2019-11-20', 853);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('그랜드파크아파트 103동 404호', '2018-11-20', 853);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('청구타운아파트 302동 302호', '2016-08-21', 884);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('e-편한세상아파트 201동 103호', '2016-09-07', 374);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('그랜드파크아파트 201동 102호', '2012-11-13', 123);
@@ -409,7 +410,7 @@ INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼정그린코아아파트 
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('자이아파트 103동 303호', '2018-10-17', 522);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('삼성아파트 101동 103호', '2013-07-11', 321);
 INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('두산위브아파트 203동 104호', '2010-11-27', 316);
-INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('LH아파트 203동 301호', '2019-09-06', 643);
+INSERT INTO mCOMMENT(Content, Ctime, Good) VALUES ('LH아파트 203동 301호', '2018-09-06', 643);
 
 
 

@@ -22,6 +22,10 @@ public class DBClass {
         dbURL = url;
     }
 
+    public DBClass(boolean mode) {
+        dbURL = "http://jaewoon.iptime.org:8080/mDB/JsonTest.jsp?";
+    }
+
     public void setURL() {
         try {
             URL url = new URL(dbURL);
