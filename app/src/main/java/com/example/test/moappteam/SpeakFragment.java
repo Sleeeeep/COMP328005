@@ -38,6 +38,7 @@ public class SpeakFragment extends Fragment {
     private Spinner catSpinner;
     private Fragment frag = this;
     private boolean flag = true;
+    private String selected = null;
 
     public SpeakFragment() {
         // Required empty public constructor
@@ -50,12 +51,13 @@ public class SpeakFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_speak, container, false);
         speakListView = view.findViewById(R.id.speakListView);
         speakListView.setAdapter(adapter);
-        catSpinner = view.findViewById(R.id.speakFavorSpinner);
+        //catSpinner = view.findViewById(R.id.speakFavorSpinner);
         String[] interest = getResources().getStringArray(R.array.favor);
 
+        /*
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(
                 getContext(),
-                R.array.favor,
+                R.array.favor_nullable,
                 //R.layout.spinner_interest);
                 android.R.layout.simple_spinner_dropdown_item);
         //android.R.layout.simple_spinner_item );
@@ -66,15 +68,27 @@ public class SpeakFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         Log.i("MainActivity.spinner", "pos = " + position + ", id = " + id);
+                        selected = catSpinner.getSelectedItem().toString();
+                        if(flag) {
+                            flag = false;
+                            speakView();
+                            flag = false;
+                        } else
+                            flag = true;
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
                         Log.i("MainActivity.spinner", "선택 없음");
+                        selected = null;
                     }
                 }
-        );
+        );*/
 
+        if(flag) {
+            speakView();
+        } else
+            flag = true;
 
         ImageButton btn = view.findViewById(R.id.writeButton);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -84,36 +98,6 @@ public class SpeakFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        if(flag) {
-            try {
-                adapter.resetItem();
-                JSONObject obj = new JSONObject();
-                JSONArray arr = new JSONArray();
-
-                obj.put("Type", "CUSTOM");
-                obj.put("Query", "SELECT * FROM Qlist");
-
-                arr.put(obj);
-
-                obj = new JSONObject();
-                obj.put("query", arr);
-
-                SpeakFragment.CustomTask viewTextList = new SpeakFragment.CustomTask();
-                viewTextList.execute(obj.toString());
-                Log.e("RESULT", obj.toString());
-
-            } catch (JSONException e) {
-                Log.i("게시판리스트 json", e.getStackTrace().toString());
-            }
-        } else {
-            flag = true;
-            Log.i("refresh", "refreshFragment");
-        }
-
-        // example
-        //adapter.addItem("title", "user", "12:00:00", "일반", 1, 1);
-        //adapter.addItem("title2", "user2", "12:00:56", "특수", 0, 3);
 
         speakListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -128,6 +112,29 @@ public class SpeakFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void speakView() {
+        try {
+            adapter.resetItem();
+            JSONObject obj = new JSONObject();
+            JSONArray arr = new JSONArray();
+
+            obj.put("Type", "CUSTOM");
+            obj.put("Query", "SELECT * FROM Qlist");
+
+            arr.put(obj);
+
+            obj = new JSONObject();
+            obj.put("query", arr);
+
+            SpeakFragment.CustomTask viewTextList = new SpeakFragment.CustomTask();
+            viewTextList.execute(obj.toString());
+            Log.e("RESULT", obj.toString());
+
+        } catch (JSONException e) {
+            Log.i("게시판리스트 json", e.getStackTrace().toString());
+        }
     }
 
     class CustomTask extends AsyncTask<String, Void, JSONArray> {
@@ -165,7 +172,8 @@ public class SpeakFragment extends Fragment {
             super.onPostExecute(arr);
             for(int i = arr.length() - 1; i >= 0; i--) {
                 try {
-                    adapter.addItem(arr.getJSONObject(i));
+                    if(selected == null || selected.equals("전체") || selected.equals(arr.getJSONObject(i).getString("Cname")))
+                        adapter.addItem(arr.getJSONObject(i));
                 } catch (Exception e) {
                     Log.e("Error", "erer");
                 }
