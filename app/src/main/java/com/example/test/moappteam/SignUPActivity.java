@@ -134,6 +134,22 @@ public class SignUPActivity extends AppCompatActivity {
                 JSONObject obj = new JSONObject();
                 JSONArray arr = new JSONArray();
 
+                obj.put("Type", "CUSTOM");
+                obj.put("Query", "SELECT Dnumber FROM mDEPARTMENT WHERE Dname='"+majorinput+"'");
+
+                arr = new JSONArray();
+                arr.put(obj);
+
+                obj = new JSONObject();
+                obj.put("query", arr);
+
+
+                CustomTask getDno = new CustomTask();
+                String Dno = getDno.execute(obj.toString()).get().toString();
+
+                obj = new JSONObject();
+                arr = new JSONArray();
+
                 obj.put("Type", "INSERT");
                 obj.put("Table", "mUSER");
                 arr.put("Id");
@@ -141,6 +157,7 @@ public class SignUPActivity extends AppCompatActivity {
                 arr.put("Sid");
                 arr.put("Name");
                 arr.put("Nick");
+                arr.put("Dno");
                 obj.put("Col", arr);
                 arr = new JSONArray();
                 arr.put("'"+id.getText().toString()+"'");
@@ -148,6 +165,7 @@ public class SignUPActivity extends AppCompatActivity {
                 arr.put("'"+sid.getText().toString()+"'");
                 arr.put("'"+sName.getText().toString()+"'");
                 arr.put("'"+nickName.getText().toString()+"'");
+                arr.put(String.valueOf(Dno));
                 obj.put("Value", arr);
 
                 arr = new JSONArray();

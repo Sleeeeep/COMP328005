@@ -43,10 +43,11 @@
     </string-array>
 
     <string-array name="major">
-        <item>컴퓨터학부</item>
-        <item>전자공학부</item>
-        <item>전기공학부</item>
-        <item>모바일공학부</item>
+        <item>컴학</item>
+        <item>전자</item>
+        <item>기계</item>
+        <item>전기</item>
+        <item>모바일공학</item>
     </string-array>
 
 </resources>
