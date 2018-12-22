@@ -9,14 +9,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SpeakViewActivity extends AppCompatActivity {
+    private JSONObject jsonObject;
     private EditText replyText;
     private ImageButton replyConfirm;
-    private JSONObject mainText;
+    private TextView speakTitle;
+    private TextView speakUser;
+    private TextView speakTime;
+    private TextView speakText;
+    private ImageButton speakLikeButton;
+    private TextView speakLikeNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,12 @@ public class SpeakViewActivity extends AppCompatActivity {
         View footer = getLayoutInflater().inflate(R.layout.activity_speak_view_footer, null, false);
         replyListView.addHeaderView(header);
         replyListView.addFooterView(footer);
+        speakTitle = findViewById(R.id.speakViewTitle);
+        speakUser = findViewById(R.id.speakViewWho);
+        speakTime = findViewById(R.id.speakViewTime);
+        speakText = findViewById(R.id.speakViewText);
+        speakLikeButton = findViewById(R.id.speakLikeButton);
+        speakLikeNum = findViewById(R.id.speakViewLikeNum);
 
         ReplyListViewAdapter adapter = new ReplyListViewAdapter();
         replyListView.setAdapter(adapter);
@@ -46,14 +59,24 @@ public class SpeakViewActivity extends AppCompatActivity {
         });
 
         try {
-            mainText = new JSONObject(getIntent().getStringExtra("MAIN_TEXT"));
+            jsonObject = new JSONObject(getIntent().getStringExtra("JSON_OBJ"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        adapter.addItem("sdf", "user", "12:00:00", 23);
+        try {
+            speakTitle.setText(jsonObject.getString("Title"));
+            speakText.setText(jsonObject.getString("Content"));
+            speakUser.setText(jsonObject.getString("Uid"));
+            speakTime.setText(jsonObject.getString("Qtime"));
+            speakLikeNum.setText(jsonObject.getString("Good"));
+        }catch (Exception e) {
+            Log.e("error", "parsing error");
+        }
 
-        replyText = findViewById(R.id.newReply);
-        replyConfirm = findViewById(R.id.replyBtn);
+        // adapter.addItem("sdf", "user", "12:00:00", 23);
+
+        //replyText = findViewById(R.id.newReply);
+        //replyConfirm = findViewById(R.id.replyBtn);
     }
 }

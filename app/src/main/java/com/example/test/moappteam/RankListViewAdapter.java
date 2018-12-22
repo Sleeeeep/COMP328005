@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class RankListViewAdapter extends BaseAdapter {
-
     private ArrayList<RankListItem> rankListItemList = new ArrayList<RankListItem>();
 
     public RankListViewAdapter() {}

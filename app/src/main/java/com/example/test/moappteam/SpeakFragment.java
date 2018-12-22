@@ -118,10 +118,10 @@ public class SpeakFragment extends Fragment {
         speakListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                JSONObject mainText = new JSONObject();
+                JSONObject jsonObject = adapter.getJSONobj(position);
                 ListView listView = (ListView) parent;
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
-                intent.putExtra("MAIN_TEXT", mainText.toString());
+                intent.putExtra("JSON_OBJ", jsonObject.toString());
                 startActivity(intent);
                 String item = (String) listView.getItemAtPosition(position);
             }

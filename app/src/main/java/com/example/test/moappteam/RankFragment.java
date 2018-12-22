@@ -69,11 +69,11 @@ public class RankFragment extends Fragment {
         if(flag)
             connectDb();
         else {
-            flag = true;
             myRank.setText(myRankText + " 등");
             myId.setText(myIdText);
             myComment.setText(myCommentText);
             myRate.setText(myRateText);
+            flag = true;
         }
 
         //for문 사용해서 붙이기
