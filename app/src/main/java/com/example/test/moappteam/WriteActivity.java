@@ -55,7 +55,7 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startWrite();
-                //finish();
+                finish();
             }
         });
 
@@ -136,14 +136,20 @@ public class WriteActivity extends AppCompatActivity {
 
 
         try {
-
             JSONObject obj = new JSONObject();
             JSONArray arr = new JSONArray();
 
-            obj.put("Type", "CUSTOM");
-
-            obj.put("Query", "INSERT INTO mQUESTION('Title','Cname','Content') " +
-                    "VALUES ('"+wTitle +"',"+cNum+",'"+wTxt+"')");
+            obj.put("Type", "INSERT");
+            obj.put("Table", "mQUESTION");
+            arr.put("Title");
+            arr.put("Content");
+            arr.put("Cno");
+            obj.put("Col", arr);
+            arr = new JSONArray();
+            arr.put("'"+wTitle.getText().toString()+"'");
+            arr.put("'"+wTxt.getText().toString()+"'");
+            arr.put(cNum);
+            obj.put("Value", arr);
 
             arr = new JSONArray();
             arr.put(obj);
@@ -155,7 +161,43 @@ public class WriteActivity extends AppCompatActivity {
 
             mainTest.execute(obj.toString());
 
-            Log.e("RESULT", obj.toString());
+            obj = new JSONObject();
+            arr = new JSONArray();
+
+            obj.put("Type", "CUSTOM");
+            obj.put("Query", "SELECT Qnumber FROM mQUESTION WHERE Title='"+wTitle.getText().toString()+"' AND Content='"+wTxt.getText().toString()+"'");
+
+            arr = new JSONArray();
+            arr.put(obj);
+
+            obj = new JSONObject();
+            obj.put("query", arr);
+
+            WriteActivity.WriteCustomTask getQno = new WriteCustomTask();
+            String Qnum = getQno.execute(obj.toString()).get();
+
+            obj = new JSONObject();
+            arr = new JSONArray();
+
+            obj.put("Type", "INSERT");
+            obj.put("Table", "mASK");
+            arr.put("Uid");
+            arr.put("Qno");
+            obj.put("Col", arr);
+            arr = new JSONArray();
+            arr.put("'"+StaticVariables.sLoginid+"'");
+            arr.put(Qnum.substring(8));
+            obj.put("Value", arr);
+
+            arr = new JSONArray();
+            arr.put(obj);
+
+            obj = new JSONObject();
+            obj.put("query", arr);
+
+            WriteActivity.WriteCustomTask insertAsk = new WriteActivity.WriteCustomTask();
+
+            insertAsk.execute(obj.toString());
 
         } catch (Exception e) {
 
