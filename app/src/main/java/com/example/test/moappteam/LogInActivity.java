@@ -96,7 +96,7 @@ public class LogInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                mDB = new DBClass("http://jaewoon.iptime.org:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass(StaticVariables.ipAddress);
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
@@ -158,7 +158,7 @@ public class LogInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                mDB = new DBClass("http://jaewoon.iptime.org:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass(StaticVariables.ipAddress);
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
@@ -217,7 +217,7 @@ public class LogInActivity extends AppCompatActivity {
 
                 obj.put("Type", "CUSTOM");
 
-                obj.put("Query", "SELECT Uid, Qnumber, Title, Good, Cname, Qtime " +
+                obj.put("Query", "SELECT * " +
                         "FROM Favor_Qlist WHERE Id='" + StaticVariables.sLoginid + "'");
 
                 arr = new JSONArray();

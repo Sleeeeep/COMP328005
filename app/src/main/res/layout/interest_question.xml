@@ -95,14 +95,15 @@
                 android:layout_height="15dp" />
 
             <TextView
+                android:id="@+id/interNum"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_gravity="center"
                 android:background="@color/colorWhite"
                 android:text="0"
-                android:textSize="10sp"
                 android:textColor="#dd1111"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_gravity="center"/>
+                android:textSize="10sp" />
 
             <ImageView
                 android:layout_width="15dp"
@@ -114,14 +115,15 @@
                 android:src="@drawable/like" />
 
             <TextView
+                android:id="@+id/interRate"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15sp"
                 android:layout_height="15sp"
+                android:layout_gravity="center"
                 android:background="@color/colorWhite"
                 android:text="0"
-                android:textSize="10sp"
-                style="?android:attr/borderlessButtonStyle"
                 android:textColor="#062ff9"
-                android:layout_gravity="center"/>
+                android:textSize="10sp" />
 
         </LinearLayout>
 
@@ -192,14 +194,15 @@
                 android:layout_height="15dp" />
 
             <TextView
+                android:id="@+id/interNum1"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_gravity="center"
                 android:background="@color/colorWhite"
                 android:text="0"
-                android:textSize="10sp"
                 android:textColor="#dd1111"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_gravity="center"/>
+                android:textSize="10sp" />
 
             <ImageView
                 android:layout_width="15dp"
@@ -211,14 +214,15 @@
                 android:src="@drawable/like" />
 
             <TextView
+                android:id="@+id/interRate1"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="15sp"
                 android:layout_height="15sp"
+                android:layout_gravity="center"
                 android:background="@color/colorWhite"
                 android:text="0"
-                android:textSize="10sp"
-                style="?android:attr/borderlessButtonStyle"
                 android:textColor="#062ff9"
-                android:layout_gravity="center"/>
+                android:textSize="10sp" />
         </LinearLayout>
 
     </LinearLayout>
