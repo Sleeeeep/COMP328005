@@ -106,7 +106,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String result = StaticVariables.mainResult;
+                String result = StaticVariables.mainFResult;
                 JSONObject jsonObject = null;
                 try{
 
@@ -127,7 +127,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String result = StaticVariables.mainResult;
+                String result = StaticVariables.mainFResult;
                 JSONObject jsonObject = null;
                 try{
 
@@ -148,12 +148,12 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String result = StaticVariables.mainResult;
+                String result = StaticVariables.mainHResult;
                 JSONObject jsonObject = null;
                 try{
 
                     JSONArray jsonArray = new JSONArray(result);
-                    jsonObject = jsonArray.getJSONObject(2);
+                    jsonObject = jsonArray.getJSONObject(0);
 
                 }catch (JSONException e){
 
@@ -169,12 +169,12 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String result = StaticVariables.mainResult;
+                String result = StaticVariables.mainHResult;
                 JSONObject jsonObject = null;
                 try{
 
                     JSONArray jsonArray = new JSONArray(result);
-                    jsonObject = jsonArray.getJSONObject(3);
+                    jsonObject = jsonArray.getJSONObject(1);
 
                 }catch (JSONException e){
 
@@ -190,17 +190,13 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String result = StaticVariables.mainResult;
+                String result = StaticVariables.mainNResult;
                 JSONObject jsonObject = null;
 
                 try{
 
                     JSONArray jsonArray = new JSONArray(result);
-                    String subString = result.substring(jsonArray.toString().length());
-                    jsonArray = new JSONArray(subString);
                     jsonObject = jsonArray.getJSONObject(0);
-
-
                 }catch (JSONException e){
 
                 }
@@ -215,20 +211,16 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String result = StaticVariables.mainResult;
+                String result = StaticVariables.mainNResult;
                 JSONObject jsonObject = null;
 
                 try{
 
                     JSONArray jsonArray = new JSONArray(result);
-                    String subString = result.substring(jsonArray.toString().length());
-                    jsonArray = new JSONArray(subString);
                     jsonObject = jsonArray.getJSONObject(1);
-
                 }catch (JSONException e){
 
                 }
-
                 Intent intent = new Intent(getActivity(), SpeakViewActivity.class);
                 intent.putExtra("JSON_OBJ", jsonObject.toString());
                 startActivity(intent);
@@ -295,13 +287,13 @@ public class MainFragment extends Fragment {
 
         //메인프레그먼트 세팅
 
-        Log.i("MainFResult",StaticVariables.mainResult);
+        Log.i("MainFResult",StaticVariables.mainFResult);
 
         try{
 
-            JSONArray jArr = new JSONArray(StaticVariables.mainResult);
+            JSONArray jArr = new JSONArray(StaticVariables.mainFResult);
             JSONObject obj = jArr.getJSONObject(0);
-            Log.i("jArr",StaticVariables.mainResult);
+            Log.i("jArr",StaticVariables.mainFResult);
 
             interId1.setText(""+obj.getString("Uid"));
             interTime1.setText(""+obj.getString("Qtime"));
@@ -319,7 +311,9 @@ public class MainFragment extends Fragment {
             interNum2.setText(""+obj.getString("Ccnt"));
             interRate2.setText(""+obj.getString("Good"));
 
-            obj = jArr.getJSONObject(2);
+            jArr = new JSONArray(StaticVariables.mainHResult);
+            obj = jArr.getJSONObject(0);
+            Log.i("jArr",StaticVariables.mainHResult);
 
             hotId1.setText(""+obj.getString("Uid"));
             hotTime1.setText(""+obj.getString("Qtime"));
@@ -328,7 +322,7 @@ public class MainFragment extends Fragment {
             hotNum1.setText(""+obj.getString("Ccnt"));
             hotRate1.setText(""+obj.getString("Good"));
 
-            obj = jArr.getJSONObject(3);
+            obj = jArr.getJSONObject(1);
 
             hotId2.setText(""+obj.getString("Uid"));
             hotTime2.setText(""+obj.getString("Qtime"));
@@ -337,11 +331,15 @@ public class MainFragment extends Fragment {
             hotNum2.setText(""+obj.getString("Ccnt"));
             hotRate2.setText(""+obj.getString("Good"));
 
-            String subResult = StaticVariables.mainResult.substring(jArr.toString().length());
-            Log.i("subResult",subResult);
+//            String subResult = StaticVariables.mainResult.substring(jArr.toString().length());
+//            Log.i("subResult",subResult);
+//
+//            jArr = new JSONArray(subResult);
+//            obj = jArr.getJSONObject(0);
 
-            jArr = new JSONArray(subResult);
+            jArr = new JSONArray(StaticVariables.mainNResult);
             obj = jArr.getJSONObject(0);
+            Log.i("jArr",StaticVariables.mainNResult);
 
             newId1.setText(""+obj.getString("Uid"));
             newTime1.setText(""+obj.getString("Qtime"));
