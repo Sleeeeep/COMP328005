@@ -4,6 +4,7 @@ package com.example.test.moappteam;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.Iterator;
-
-import static java.lang.Thread.sleep;
 
 
 /**
@@ -33,9 +33,18 @@ public class RankFragment extends Fragment {
     private TextView myComment;
     private TextView myRate;
 
+    private String myRankText;
+    private String myIdText;
+    private String myCommentText;
+    private String myRateText;
+
     JSONObject obj = new JSONObject();
     JSONArray arr = new JSONArray();
 
+    private ListView rankListView;
+    private RankListViewAdapter adapter = new RankListViewAdapter();
+    private boolean flag = true;
+    private Fragment frag = this;
 
     public RankFragment() {
         // Required empty public constructor
@@ -54,46 +63,39 @@ public class RankFragment extends Fragment {
         myComment = view.findViewById(R.id.rankCom);
         myRate = view.findViewById(R.id.rankRate);
 
-
-        ListView rankListView = view.findViewById(R.id.rankListView);
-        RankListViewAdapter adapter = new RankListViewAdapter();
+        rankListView = view.findViewById(R.id.rankListView);
         rankListView.setAdapter(adapter);
 
-        connectDb();
-
-        try {
-
-            sleep(1000);
-
-        }catch (Exception e){
-
+        if(flag)
+            connectDb();
+        else {
+            flag = true;
+            myRank.setText(myRankText + " 등");
+            myId.setText(myIdText);
+            myComment.setText(myCommentText);
+            myRate.setText(myRateText);
         }
-
 
         //for문 사용해서 붙이기
 
-        adapter.addItem(1,"user", 1, 1);
+        //adapter.addItem(1,"user", 1, 1);
 
 
 
         //내 순위 정보 업데이트 및 전체적인 디비 정보 받아오기
 
         return view;
-
     }
 
     public void connectDb(){
         //이미 정보가 있는 경우 서버와 연동하지 않음
 
-        if(!StaticVariables.sRankInfo.equals(null)){
+        if(StaticVariables.sRankInfo==null){
 
             try{
-
-                obj.put("Type", "LOGIN");
-                //쿼리문에 맞게 전달 해 줘야함
-                //arr.put("Id='"+inputId.getText().toString()+"'");
-                //arr.put("Pw='"+inputPw.getText().toString()+"'");
-                obj.put("Cond", arr);
+                adapter.resetItem();
+                obj.put("Type", "CUSTOM");
+                obj.put("Query", "SELECT * FROM Ranking");
 
                 arr = new JSONArray();
                 arr.put(obj);
@@ -115,7 +117,7 @@ public class RankFragment extends Fragment {
     }
 
 
-    class RankCustomTask extends AsyncTask<String, Void, String> {
+    class RankCustomTask extends AsyncTask<String, Void, JSONArray> {
 
         JSONObject json = null;
         String data = "";
@@ -123,9 +125,10 @@ public class RankFragment extends Fragment {
         DBClass mDB;
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected JSONArray doInBackground(String... strings) {
+            JSONArray jArr = new JSONArray();
             try {
-                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass(StaticVariables.ipAddress);
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
@@ -134,33 +137,49 @@ public class RankFragment extends Fragment {
                     if (strings[0].contains("SELECT") || strings[0].contains("CUSTOM")) {
                         json = mDB.getData();
 
-                        JSONArray jArr = json.getJSONArray("response");
-
-                        for (int i = 0; i < jArr.length(); i++) {
-                            data += "\n";
-                            json = jArr.getJSONObject(i);
-                            Iterator<?> iter = json.keys();
-                            while (iter.hasNext()) {
-                                String temp = iter.next().toString();
-                                data += temp + " " + json.getString(temp) + "\n";
-                            }
-                        }
-                    } else
-                        data = mDB.getData().getString("response");
+                        jArr = json.getJSONArray("response");
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return data;
+            return jArr;
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.i("RESULT",s);
+        protected void onPostExecute(JSONArray arr) {
+            boolean breakFlag = false;
+            super.onPostExecute(arr);
+            Log.i("RESULT",arr.toString());
 
-            StaticVariables.sRankInfo = s;
+            for(int i = 0; i < arr.length(); i++) {
+                if(i < 10) {
+                    try {
+                        adapter.addItem(arr.getJSONObject(i), i + 1);
+                    } catch (Exception e) {
+                        Log.e("Error", "어댑터에러");
+                    }
+                }
+                try {
+                    if (arr.getJSONObject(i).getString("Id").equals(StaticVariables.sLoginid)) {
+                        myRankText = Integer.toString(i + 1);
+                        myIdText = StaticVariables.sLoginid;
+                        myCommentText = arr.getJSONObject(i).getString("Cnt");
+                        if(myCommentText.equals("null"))
+                            myCommentText = "0";
+                        myRateText = arr.getJSONObject(i).getString("Good");
+                        if(myRateText.equals("null"))
+                            myRateText = "0";
+                    }
+                }catch (Exception e) {
 
+                }
+                if(i >= 10 && breakFlag)
+                    break;
+            }
+            flag = false;
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(frag).attach(frag).commit();
         }
     }
 

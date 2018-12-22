@@ -3,6 +3,7 @@ package com.example.test.moappteam;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,6 @@ public class LogInActivity extends AppCompatActivity {
     Button signBtn;
     EditText inputId;
     EditText inputPw;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,6 @@ public class LogInActivity extends AppCompatActivity {
         if(!inputId.getText().toString().equals("") && !inputPw.getText().toString().equals("")){
 
             try{
-
 
                 JSONObject obj = new JSONObject();
                 JSONArray arr = new JSONArray();
@@ -84,7 +83,6 @@ public class LogInActivity extends AppCompatActivity {
             Toast.makeText(LogInActivity.this,"아이디와 비밀번호를 확인해 주세요",Toast.LENGTH_SHORT).show();
         }
 
-
     }
 
 
@@ -98,7 +96,7 @@ public class LogInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass(StaticVariables.ipAddress);
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
@@ -147,10 +145,8 @@ public class LogInActivity extends AppCompatActivity {
                 Toast.makeText(LogInActivity.this,"로그인에 실패했습니다",Toast.LENGTH_SHORT).show();
 
             }
-
         }
     }
-
 
     class MainFCustomTask extends AsyncTask<String, Void, String> {
 
@@ -162,7 +158,7 @@ public class LogInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                mDB = new DBClass("http://155.230.84.89:8080/mDB/JsonTest.jsp?");
+                mDB = new DBClass(StaticVariables.ipAddress);
                 mDB.setURL();
 
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
@@ -174,13 +170,8 @@ public class LogInActivity extends AppCompatActivity {
                         JSONArray jArr = json.getJSONArray("response");
 
                         for (int i = 0; i < jArr.length(); i++) {
-                            data += "\n";
-                            json = jArr.getJSONObject(i);
-                            Iterator<?> iter = json.keys();
-                            while (iter.hasNext()) {
-                                String temp = iter.next().toString();
-                                data += temp + " " + json.getString(temp) + "\n";
-                            }
+                            //Log.i("mainResult",jArr.toString());
+                            data += jArr.toString();
                         }
                     } else
                         data = mDB.getData().getString("response");
@@ -197,9 +188,19 @@ public class LogInActivity extends AppCompatActivity {
 
             StaticVariables.mainResult = s;
 
-            Log.i("mainResult",s);
+            Log.i("mainResult",StaticVariables.mainResult);
 
-            finish();
+            try {
+
+                Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+
+                startActivity(intent);
+
+                finish();
+
+            } catch (Exception e) {
+
+            }
         }
     }
 
@@ -209,15 +210,15 @@ public class LogInActivity extends AppCompatActivity {
 
         }else{
 
-            try{
+            try {
 
                 JSONObject obj = new JSONObject();
                 JSONArray arr = new JSONArray();
 
                 obj.put("Type", "CUSTOM");
 
-                obj.put("Query", "SELECT Uid, Qnumber, Title, Good, Cname, Qtime " +
-                        "FROM Favor_Qlist WHERE Id='"+StaticVariables.sLoginid+"'");
+                obj.put("Query", "SELECT * " +
+                        "FROM Favor_Qlist WHERE Id='" + StaticVariables.sLoginid + "'");
 
                 arr = new JSONArray();
                 arr.put(obj);
@@ -229,16 +230,12 @@ public class LogInActivity extends AppCompatActivity {
 
                 mainTest.execute(obj.toString());
 
-                Log.e("RESULT",obj.toString());
+                Log.e("RESULT", obj.toString());
 
-
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
     }
-
-
-
 
 }

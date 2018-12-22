@@ -1,11 +1,14 @@
 package com.example.test.moappteam;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -66,17 +69,31 @@ public class SpeakListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String user, String time, String classify, int replyNum, int likeNum) {
+    public void addItem(JSONObject obj) {
         SpeakListItem item = new SpeakListItem();
+        Log.i("Json",obj.toString());
 
-        item.setTitle(title);
-        item.setUser(user);
-        item.setTime(time);
-        item.setClassify(classify);
-        item.setReplyNum(replyNum);
-        item.setLikeNum(likeNum);
+        try {
+            //item.setSpeakNum(obj.getInt("Qnumber"));
+            item.setSpeakNum(1);
+            item.setTitle(obj.getString("Title"));
+            item.setUser(obj.getString("Uid"));
+            item.setTime(obj.getString("Qtime"));
+            item.setClassify(obj.getString("Cname"));
+            if(!obj.isNull("Ccnt"))
+                item.setReplyNum(obj.getInt("Ccnt"));
+            else
+                item.setReplyNum(0);
+            item.setLikeNum(obj.getInt("Good"));
 
-        speakListItemList.add(item);
+            speakListItemList.add(item);
+        } catch (Exception e){
+            Log.i("Error", "Err");
+        }
+
+    }
+    public void resetItem() {
+        speakListItemList = new ArrayList<>();
     }
 }
 

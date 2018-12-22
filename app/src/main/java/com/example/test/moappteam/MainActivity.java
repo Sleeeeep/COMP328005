@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private RankFragment rankFragment;
     private Toolbar toolbar;
 
-
     private long backPressedTime = 0;
     private final long FINISH_INTERVAL_TIME = 2000;
 
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.login,menu);
         return true;
@@ -117,6 +116,6 @@ public class MainActivity extends AppCompatActivity {
             default :
                 return false;
         }
-    }
+    }*/
 
 }

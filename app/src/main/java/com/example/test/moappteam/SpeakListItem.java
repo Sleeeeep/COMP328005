@@ -1,6 +1,7 @@
 package com.example.test.moappteam;
 
 public class SpeakListItem {
+    private int speakNum;
     private String title;
     private String user;
     private String time;
@@ -30,6 +31,9 @@ public class SpeakListItem {
     public void setText(String text) {
         this.text = text;
     }
+    public void setSpeakNum(int speakNum) {
+        this.speakNum = speakNum;
+    }
 
     public String getTitle() {
         return title;
@@ -51,5 +55,8 @@ public class SpeakListItem {
     }
     public String getText() {
         return text;
+    }
+    public int getSpeakNum() {
+        return speakNum;
     }
 }

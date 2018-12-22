@@ -1,5 +1,7 @@
 package com.example.test.moappteam.DBpkg;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -53,12 +55,12 @@ public class DBClass {
         try {
             BufferedReader bufreader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
             String line = null;
-            String page = "";
+            StringBuilder page = new StringBuilder();
 
             while ((line = bufreader.readLine()) != null) {
-                page += line;
+                page.append(line);
             }
-            json = new JSONObject(page);
+            json = new JSONObject(page.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
