@@ -87,27 +87,7 @@ public class SpeakViewActivity extends AppCompatActivity {
             Log.e("error", "parsing error");
         }
 
-        try {
-            adapter.resetItem();
-            JSONObject obj = new JSONObject();
-            JSONArray arr = new JSONArray();
-
-            obj.put("Type", "CUSTOM");
-            obj.put("Query", "SELECT * FROM Clist WHERE Qno=" + jsonObject.getString("Qno"));
-
-            arr.put(obj);
-
-            obj = new JSONObject();
-            obj.put("query", arr);
-
-            SpeakViewActivity.ReplyViewTask viewTextList = new SpeakViewActivity.ReplyViewTask();
-            viewTextList.execute(obj.toString());
-            Log.e("RESULT", obj.toString());
-        } catch (JSONException e) {
-            Log.i("게시판리스트 json", e.getStackTrace().toString());
-        }
-
-        //  adapter.addItem("sdf", "user", "12:00:00", 23);
+        replyView();
 
         replyText = (EditText) findViewById(R.id.newReply);
         replyConfirm =(ImageButton)findViewById(R.id.replyBtn);
@@ -211,6 +191,27 @@ public class SpeakViewActivity extends AppCompatActivity {
 
     }
 
+    private void replyView() {
+        try {
+            JSONObject obj = new JSONObject();
+            JSONArray arr = new JSONArray();
+
+            obj.put("Type", "CUSTOM");
+            obj.put("Query", "SELECT * FROM Clist WHERE Qno=" + jsonObject.getString("Qno"));
+
+            arr.put(obj);
+
+            obj = new JSONObject();
+            obj.put("query", arr);
+
+            SpeakViewActivity.ReplyViewTask viewTextList = new SpeakViewActivity.ReplyViewTask();
+            viewTextList.execute(obj.toString());
+            Log.e("RESULT", obj.toString());
+        } catch (JSONException e) {
+            Log.i("게시판리스트 json", e.getStackTrace().toString());
+        }
+    }
+
     class ReplyViewTask extends AsyncTask<String, Void, JSONArray> {
 
         JSONObject json = null;
@@ -244,7 +245,8 @@ public class SpeakViewActivity extends AppCompatActivity {
         protected void onPostExecute(JSONArray arr) {
             Log.i("RESULT", arr.toString());
             super.onPostExecute(arr);
-            for (int i = arr.length() - 1; i >= 0; i--) {
+            adapter.resetItem();
+            for (int i = 0; i < arr.length(); i++) {
                 try {
                     adapter.addItem(arr.getJSONObject(i));
                     Log.i("arr",arr.getJSONObject(i).toString() );
@@ -300,6 +302,8 @@ public class SpeakViewActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("REPLY_RESULT",s);
+            replyText.setText("");
+            replyView();
         }
     }
 
