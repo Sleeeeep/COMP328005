@@ -33,6 +33,7 @@ public class SpeakViewActivity extends AppCompatActivity {
     private TextView speakLikeNum;
     private ReplyListViewAdapter adapter = new ReplyListViewAdapter();
     private boolean flag = true;
+    private ListView replyListView;
 
     private String Qno = "";
 
@@ -40,8 +41,8 @@ public class SpeakViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speak_view);
+        replyListView = findViewById(R.id.replyList);
 
-        ListView replyListView = findViewById(R.id.replyList);
         View header = getLayoutInflater().inflate(R.layout.activity_speak_view_header, null, false);
         View footer = getLayoutInflater().inflate(R.layout.activity_speak_view_footer, null, false);
         replyListView.addHeaderView(header);

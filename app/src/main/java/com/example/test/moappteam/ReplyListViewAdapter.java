@@ -87,7 +87,7 @@ public class ReplyListViewAdapter extends BaseAdapter {
 
         }
 
-        //replyListItemList.add(item);
+        replyListItemList.add(item);
     }
     public void resetItem() {
         replyListItemList = new ArrayList<>();
