@@ -211,6 +211,7 @@ public class SignUPActivity extends AppCompatActivity {
 
             if(s.equals("1")){
                 Toast.makeText(SignUPActivity.this,"회원가입에 성공했습니다",Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
