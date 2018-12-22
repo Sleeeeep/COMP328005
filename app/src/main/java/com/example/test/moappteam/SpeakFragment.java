@@ -33,7 +33,6 @@ import java.util.Iterator;
  * A simple {@link Fragment} subclass.
  */
 public class SpeakFragment extends Fragment {
-    private ArrayList<Integer> speakNum = new ArrayList<>();
     private ListView speakListView;
     private SpeakListViewAdapter adapter = new SpeakListViewAdapter();
     private Spinner catSpinner;
@@ -88,7 +87,7 @@ public class SpeakFragment extends Fragment {
 
         if(flag) {
             try {
-
+                adapter.resetItem();
                 JSONObject obj = new JSONObject();
                 JSONArray arr = new JSONArray();
 
@@ -104,11 +103,12 @@ public class SpeakFragment extends Fragment {
                 viewTextList.execute(obj.toString());
                 Log.e("RESULT", obj.toString());
 
-
             } catch (JSONException e) {
                 Log.i("게시판리스트 json", e.getStackTrace().toString());
             }
+        } else {
             flag = true;
+            Log.i("refresh", "refreshFragment");
         }
 
         // example
@@ -143,6 +143,7 @@ public class SpeakFragment extends Fragment {
                 mDB = new DBClass(StaticVariables.ipAddress);
                 mDB.setURL();
 
+                Log.i("url", strings[0]);
                 if (mDB.writeURL(strings[0]) != HttpURLConnection.HTTP_OK)
                     Log.i("DB", "url connection error");
                 else {
@@ -169,10 +170,9 @@ public class SpeakFragment extends Fragment {
                     Log.e("Error", "erer");
                 }
             }
-            adapter.notifyDataSetChanged();
+            flag = false;
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.detach(frag).attach(frag).commit();
-            flag = false;
         }
     }
 }

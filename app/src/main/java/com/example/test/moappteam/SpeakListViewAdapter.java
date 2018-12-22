@@ -92,6 +92,9 @@ public class SpeakListViewAdapter extends BaseAdapter {
         }
 
     }
+    public void resetItem() {
+        speakListItemList = new ArrayList<>();
+    }
 }
 
 //http://recipes4dev.tistory.com/43

@@ -42,7 +42,7 @@
             android:layout_marginHorizontal="5dp"
             android:padding="2dp"
             android:textStyle="bold"
-            android:text="Id : " />
+            android:text="ID : " />
 
         <TextView
             android:id="@+id/rankUser"
@@ -62,9 +62,10 @@
 
         <TextView
             android:id="@+id/rankCom"
-            android:layout_width="20dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="right"
             android:text="0"
             android:textStyle="bold"
             android:layout_marginHorizontal="5dp" />
@@ -78,11 +79,12 @@
 
         <TextView
             android:id="@+id/rankRate"
-            android:layout_width="20dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:text="0"
             android:textStyle="bold"
+            android:gravity="right"
             android:layout_marginHorizontal="5dp" />
 
 
